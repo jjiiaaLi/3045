@@ -1,0 +1,36 @@
+.landingPageDiv {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+
+.splashDiv {
+    background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/44b16e9f-4277-462b-a7e0-951f30a0a4a6/db6slds-7641a6a9-35c3-4607-a272-53cd279f7705.jpg/v1/fill/w_1280,h_640,q_75,strp/destroyed_city_by_nacho3_db6slds-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvNDRiMTZlOWYtNDI3Ny00NjJiLWE3ZTAtOTUxZjMwYTBhNGE2XC9kYjZzbGRzLTc2NDFhNmE5LTM1YzMtNDYwNy1hMjcyLTUzY2QyNzlmNzcwNS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.pFhGkh2RKJ3MbHcUXpXWl6MfYl9syZF2byc69UXWZow);
+    width: 1000px;
+    height: 486px;
+    background-size: 100%;
+    background-position: relative;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    margin-left:-100px;
+}
+
+.salesPitchContainer{
+    width:300px;
+    height:350px;
+    position:relative;
+    border-radius: 15px;
+    background-color: white;
+    margin-left:320px;
+    margin-top: 50px;
+    box-shadow: -8px 0px 10px rgb(164, 163, 163);
+    display: flex;
+    flex-direction: column;
+}
+
+.joinUsText, .signUpLink {
+    margin:12px;
+    font-size:25px;
+    font-family:Arial;
+}
