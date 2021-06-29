@@ -5,6 +5,8 @@ import title from '../images/title.png';
 import './NavBar.css'
 
 const NavBar = () => {
+  
+
   return (
     <nav className="NavDiv">
       <div className="NavObj">
