@@ -11,6 +11,12 @@ def seed_users():
 
     db.session.commit()
 
+    demo1 = User(username='DemoUser2', email='demo2@aa.io',
+                password='password')
+
+    db.session.add(demo1)
+
+    db.session.commit()
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and resets
