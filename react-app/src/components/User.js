@@ -8,7 +8,7 @@ function User() {
   const { userId }  = useParams();
   const dispatch = useDispatch();
   const popularDestinations=useSelector(state=>Object.values(state.destinations))
-  console.log(popularDestinations)
+  
   
   useEffect(() => {
     dispatch(loadPopDest())

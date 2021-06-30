@@ -1,23 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
+import { loadLodgings } from "../../store/lodgings";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
     const {id}=useParams()
+    const [lodgingAttributes, setLodgingAttributes]=useState('')
     const dispatch=useDispatch()
     const destination=useSelector(state=>Object.values(state.destinations))
+    const lodgings=useSelector(state=>Object.values(state.lodgings))
     
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
+        dispatch(loadLodgings(Number(id)))
     },[dispatch])
+
+    
     let imageArr
     if(destination.length){
         imageArr=destination[0].images.split(',')
-        
     }
     
+    let lodgingAttributeList
+    if(lodgingAttributes.length){
+      lodgingAttributeList=lodgingAttributes.split(',')
+      console.log(lodgingAttributeList)
+    }
     
 
     return (
@@ -55,8 +65,40 @@ export default function IndividualDestination() {
           <p className="individualDestDividerLine">
             _________________________________________________________________________________________________________________________________________________________
           </p>
-          <p className="individualDestSummaryLabel">
-              Available Lodgings
+          <p className="individualDestSummaryLabel">Available Lodgings</p>
+          <div className="lodgingThumbContainer">
+            {lodgings.length &&
+              lodgings.map((lodging) => (
+                <div className="lodgingThumbEach">
+                  <img className="eachLodgingImg" src={lodging.image} />
+                  <button
+                    value={lodging.attributes}
+                    className="lodgingSelectBtn"
+                    onClick={(e) => {
+                      setLodgingAttributes(e.target.value);
+                    }}
+                  >
+                    Explore
+                  </button>
+                  <p className="lodgingThumbName">{lodging.name}</p>
+                </div>
+              ))}
+          </div>
+          {lodgingAttributeList && (
+            <ul className="lodgingAttributDisplay">
+              <li className="lodgingAttributeItemText">
+                {lodgingAttributeList[0]}
+              </li>
+              <li className="lodgingAttributeItemText">
+                {lodgingAttributeList[1]}
+              </li>
+              <li className="lodgingAttributeItemText">
+                {lodgingAttributeList[2]}
+              </li>
+            </ul>
+          )}
+          <p className="individualDestDividerLine">
+            _________________________________________________________________________________________________________________________________________________________
           </p>
         </div>
       </div>

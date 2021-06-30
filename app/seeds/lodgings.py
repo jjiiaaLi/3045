@@ -31,7 +31,7 @@ def seed_lodgings():
 
     db.session.commit()
 
-    SanFran2 = Lodging(name='Traditional Atmosphere', attributes='Build according to archeological findings,Experience the creator life,Save on credits not on luxury',
+    SanFran2 = Lodging(name='Traditional Atmosphere', attributes='Built according to archeological findings,Experience the creator life,Save on credits not on luxury',
                 destination_id=2, image='https://videohive.img.customer.envatousercontent.com/files/14d04f8b-f604-43d3-a171-7d3ddcf523a1/inline_image_preview.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=8311003dda660260c5dda4a2f851880c')
 
     db.session.add(SanFran2)
