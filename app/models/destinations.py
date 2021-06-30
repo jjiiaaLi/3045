@@ -12,3 +12,10 @@ class Destination(db.Model):
     activities=db.relationship('Activity', back_populates='destinations')
     lodgings=db.relationship('Lodging', back_populates='destinations')
     
+    def to_dict(self):
+        return {
+        "id": self.id,
+        "name": self.name,
+        "summary": self.summary,
+        "images": self.images
+        }

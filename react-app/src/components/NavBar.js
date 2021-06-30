@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import title from '../images/title.png';
 import './NavBar.css'
@@ -10,27 +10,27 @@ const NavBar = () => {
   return (
     <nav className="NavDiv">
       <div className="NavObj">
-        <NavLink to="/" exact={true} activeClassName="active">
-          <img className='logoImg' src={title} alt='logo'/>
-        </NavLink>
+        <Link to="/" exact={true}>
+          <img className="logoImg" src={title} alt="logo" />
+        </Link>
       </div>
       <div className="NavObj">
-        <NavLink to="/login" exact={true} activeClassName="active">
+        <Link className="NavLinks" to="/login" exact={true}>
           Login
-        </NavLink>
+        </Link>
       </div>
       <div className="NavObj">
-        <NavLink to="/sign-up" exact={true} activeClassName="active">
+        <Link className="NavLinks" to="/sign-up" exact={true}>
           Sign Up
-        </NavLink>
+        </Link>
       </div>
       <div className="NavObj">
-        <NavLink to="/users" exact={true} activeClassName="active">
+        <Link className="NavLinks" to="/users" exact={true}>
           Users
-        </NavLink>
+        </Link>
       </div>
       <div className="NavObj">
-        <LogoutButton />
+        <LogoutButton  />
       </div>
     </nav>
   );

@@ -26,8 +26,13 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  const demoLogin=async(e)=>{
+    e.preventDefault()
+    await dispatch(login('demo@aa.io', 'password'));
+  }
+
   if (user) {
-    return <Redirect to="/users" />;
+    return <Redirect to={`/users/${user.id}`} />;
   }
 
   return (
@@ -58,6 +63,7 @@ const LoginForm = () => {
         />
         <button type="submit">Login</button>
       </div>
+      <button className='demoUserBtn' onClick={demoLogin} >Login As DemoUser</button>
     </form>
   );
 };
