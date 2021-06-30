@@ -33,7 +33,7 @@ export const loadSingleDest=(id)=>async(dispatch)=>{
     
     if (res.ok){
         const data= await res.json()
-        console.log(data)
+        
         dispatch(getSingleDest(data))
     }
 }

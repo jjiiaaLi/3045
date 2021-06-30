@@ -1,5 +1,73 @@
+.individualDestDividerLine{
+    color:rgb(222, 222, 222);
+    font-weight: bolder;
+    
+}
+
+.individualDestContainer{
+    width:1230px;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    margin-left: 310px;
+    border-style: hidden;
+}
+
 .individualDestPhotosContainer{
     display:flex;
-    width:1000px;
+    width:1230px;
     height:500px;
+    border-style: solid;
+    border-radius: 27px;
+    border-style: hidden;
+    overflow: hidden;
+}
+
+.individualDestOtherPicsContainer{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.individualDestFirstPic {
+    width:600px;
+    height:500px;
+    object-fit: cover;
+}
+
+.individualDestOtherPics {
+    width:305px;
+    height: 245px;
+    padding-top:0px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-right:0px;
+    object-fit: cover;
+
+}
+
+
+.individualDestTitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: lighter;
+}
+
+
+.individualDestSummaryDiv{
+    
+    margin-top: 60px;
+}
+
+.individualDestSummaryLabel{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    margin-top: 60px;
+}
+
+.individualDestSummaryContent{
+    color:rgb(116, 114, 114);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: lighter;
+    line-height: 1.7;
 }

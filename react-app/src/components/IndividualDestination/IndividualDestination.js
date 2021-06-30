@@ -15,9 +15,9 @@ export default function IndividualDestination() {
     let imageArr
     if(destination.length){
         imageArr=destination[0].images.split(',')
+        
     }
     
-
     
 
     return (
@@ -36,6 +36,29 @@ export default function IndividualDestination() {
             </div>
           </div>
         )}
+        <div className="individualDestSummaryDiv">
+          <p className="individualDestDividerLine">
+            _________________________________________________________________________________________________________________________________________________________
+          </p>
+          {destination.length && (
+            <p className="individualDestSummaryLabel">
+              About {destination[0].name}
+            </p>
+          )}
+          {destination.length && (
+            <p className="individualDestSummaryContent">
+              {destination[0].summary}
+            </p>
+          )}
+        </div>
+        <div className="lodgingsDiv">
+          <p className="individualDestDividerLine">
+            _________________________________________________________________________________________________________________________________________________________
+          </p>
+          <p className="individualDestSummaryLabel">
+              Available Lodgings
+          </p>
+        </div>
       </div>
     );
 

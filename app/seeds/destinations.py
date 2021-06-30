@@ -19,7 +19,7 @@ def seed_destinations():
     city2=Destination(name="Z159798663_0081", summary='Sea side creator hub known for it\'s foggy climate and abundant ocean fauna.  Now 64.53 percent under water.  Home to a small population of creators mostly near the shore area', 
                 images='https://i.pinimg.com/originals/6c/47/39/6c4739d8bf8b3bb9c7e123cb22361a79.jpg,\
                     https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXW6TCSh9gAnmrw1MBf9aLbNTx7VK83p3sA&usqp=CAU,\
-                        https://i.pinimg.com/originals/c8/59/ce/c859ce02df9e538e3ab3ea1ec392ffec.jpg\
+                        https://i.pinimg.com/originals/c8/59/ce/c859ce02df9e538e3ab3ea1ec392ffec.jpg,\
                             https://i.pinimg.com/originals/44/7c/3e/447c3ef1ede69974d5009a77767dafe5.jpg,\
                                 https://i.pinimg.com/originals/2e/93/7b/2e937b5e054e43a99916c9f8526b5748.jpg')
 
