@@ -100,6 +100,7 @@ export default function IndividualDestination() {
           <p className="individualDestDividerLine">
             _________________________________________________________________________________________________________________________________________________________
           </p>
+          <p className='individualDestSummaryLabel'>Near By Attractions</p>
         </div>
       </div>
     );
