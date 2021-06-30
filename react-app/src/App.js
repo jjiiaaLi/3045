@@ -8,6 +8,11 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import Landing from './components/Landing/Landing';
+import IndividualDestination from "./components/IndividualDestination/IndividualDestination";
+
+
+
+
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
@@ -40,6 +45,9 @@ function App() {
         <Route path="/" exact={true} >
           <Landing />
         </Route>
+        <ProtectedRoute path='/destination/:id'>
+          <IndividualDestination />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

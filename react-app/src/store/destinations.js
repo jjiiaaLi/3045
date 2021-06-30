@@ -1,5 +1,5 @@
 const GET_POPULAR_DEST='destinations/GET_POPULAR_DEST'
-
+const GET_SINGLE_DEST='destinations/GET_SINGLE_DEST'
 
 
 
@@ -9,7 +9,10 @@ const getPopDest = (dests)=>({
     dests:dests
 })
 
-
+const getSingleDest = (destination)=>({
+    type:GET_SINGLE_DEST,
+    destination:destination,
+})
 
 
 
@@ -25,6 +28,16 @@ export const loadPopDest=()=>async (dispatch)=>{
 }
 
 
+export const loadSingleDest=(id)=>async(dispatch)=>{
+    const res=await fetch(`/api/destinations/${id}`)
+    
+    if (res.ok){
+        const data= await res.json()
+        console.log(data)
+        dispatch(getSingleDest(data))
+    }
+}
+
 
 
 export default function destinationReducer(state={}, action){
@@ -34,6 +47,9 @@ export default function destinationReducer(state={}, action){
             action.dests.destinations.forEach(dest=>{
                 newState[dest.id]=dest
             })
+            return newState
+        case GET_SINGLE_DEST:
+            newState[action.destination.id]=action.destination
             return newState
         default:
             return state;
