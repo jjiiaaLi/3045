@@ -13,6 +13,7 @@ export default function IndividualDestination() {
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
     const activities=useSelector(state=>Object.values(state.activities))
+    
 
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
@@ -103,7 +104,23 @@ export default function IndividualDestination() {
           <p className="individualDestDividerLine">
             _________________________________________________________________________________________________________________________________________________________
           </p>
-          <p className='individualDestSummaryLabel'>Near By Attractions</p>
+          <p className="individualDestSummaryLabel">Near By Attractions</p>
+          <div className="activitiesContainer">
+            {activities &&
+              activities.map((activity) => (
+                <div className="individualActivityContainer">
+                  <img className="activityImage" src={activity.image} />
+                  <div>
+                    <p className="activityName">{activity.name}</p>
+                    <p className="activitySummary">{activity.attributes}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <p className="individualDestDividerLine">
+            _________________________________________________________________________________________________________________________________________________________
+          </p>
+          <p className='reviewLabel'>Reviews</p>
         </div>
       </div>
     );

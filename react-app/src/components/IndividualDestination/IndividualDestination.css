@@ -78,6 +78,7 @@
     width:1230px;
     display:flex;
     flex-direction: row;
+    padding-top: 15px;
     
 }
 
@@ -87,6 +88,7 @@
     align-items: center;
     margin-left: 55px;
     margin-right: 55px;
+    transition: .8s;
 }
 
 .eachLodgingImg {
@@ -104,18 +106,25 @@
     border-radius: 9px;
     border-style: hidden;
     color:ivory;
-    margin-top:2px;
+    margin-top:5px;
+    cursor:pointer;
+    transition: .8s;
 }
 
 .lodgingThumbName{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight:lighter;
-    
+
 }
 
 .lodgingAttributDisplay{
     width:1230px;
+    
+}
+
+.lodgingSelectBtn:hover{
+    transform: scale(1.5);
 }
 
 .lodgingAttributeItemText{
@@ -123,4 +132,55 @@
     font-size: 20px;
     margin:18px;
     color: rgb(116, 114, 114);
+}
+
+.activitiesContainer{
+    width: 1230px;
+    margin-top: 60px;
+}
+
+.individualActivityContainer{
+    border-style: hidden;
+    height: 340px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 25px;
+    border-width: 4px;
+    box-shadow: 5px 5px 5px gray;
+    margin:13px;
+    margin-top: 30px;
+    transition: .8s;
+}
+
+.activityImage{
+    border-radius: 20px;
+    width: 550px;
+    height: 300px;
+    margin-right: 40px;
+}
+
+
+.activityName{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+.activitySummary{
+    font-family: Arial, Helvetica, sans-serif;
+    width:600px;
+    color:rgb(116, 114, 114);
+    line-height: 2;
+}
+
+.individualActivityContainer:hover{
+    transform: scale(1.1);
+}
+
+.lodgingThumbEach:hover{
+    transform: scale(1.2);
+}
+
+.reviewLabel{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
 }

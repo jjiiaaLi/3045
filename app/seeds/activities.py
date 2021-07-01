@@ -31,7 +31,7 @@ def seed_activities():
     db.session.commit()
 
     SFactivity1 = Activity(name='Deep Dive', attributes='Explore a renovated underwater city constructed during the \'Big Melt\'. Currently connected to the Ocean Resort by conveyer system.  Reconnect with the past while gazing at the sunken city that at one time housed over 800,000 creator units.',
-                destination_id=2, image='https://miro.medium.com/max/1600/0*5NxPK8PDeOoGKLKK.jpg')
+                destination_id=2, image='https://www.theglimpse.com/wp-content/uploads/2015/06/futuristic-city-under-the-sea.jpg')
 
     db.session.add(SFactivity1)
 
