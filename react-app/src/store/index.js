@@ -5,6 +5,7 @@ import destinationReducer from "./destinations";
 import lodgingReducer from "./lodgings";
 import activitiesReducer from './activities';
 import reviewReducer from "./reviews";
+import UserReducers from "./users";
 
 const rootReducer = combineReducers({
     session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     lodgings:lodgingReducer,
     activities:activitiesReducer,
     reviews:reviewReducer,
+    users:UserReducers,
 });
 
 

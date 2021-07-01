@@ -5,8 +5,10 @@ from app.forms import ReviewForm
 review_routes = Blueprint('review', __name__)
 
 
-# @review_routes.route('/<int:id>', methods=["GET"])
-# def get_reviews(id):
+@review_routes.route('/<int:id>', methods=["GET"])
+def get_reviews(id):
+    reviews=Review.query.filter_by(destination_id=id)
+    return {'reviews':[review.to_dict() for review in reviews]}
 
 
 

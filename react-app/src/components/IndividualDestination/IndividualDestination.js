@@ -5,6 +5,7 @@ import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
 import { getDestinationReviews, postAReview } from "../../store/reviews";
+import { grabUsers } from "../../store/users";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
@@ -15,12 +16,15 @@ export default function IndividualDestination() {
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
     const activities=useSelector(state=>Object.values(state.activities))
-    
+    const reviews=useSelector(state=>Object.values(state.reviews))
+    const users=useSelector(state=>Object.values(state.users))
 
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
         dispatch(loadLodgings(Number(id)))
         dispatch(loadDestinationActivities(Number(id)))
+        dispatch(getDestinationReviews(Number(id)))
+        dispatch(grabUsers())
     },[dispatch])
 
     
@@ -39,6 +43,14 @@ export default function IndividualDestination() {
       e.preventDefault()
       
       await dispatch(postAReview(Number(id),destination[0].id,reviewContent))
+    }
+
+    const getAuthorName=(user_id)=>{
+      return users.map(user=>{
+        if(user.id===user_id){
+          return user.username
+        }
+      })
     }
 
     return (
@@ -136,6 +148,14 @@ export default function IndividualDestination() {
                   <button type='submit'>Submit Review</button>
                 </div>
           </form>
+          {reviews&&<div className='displayReviewsContainer'>
+                {reviews.map(review=>(
+                  <div className='eachReviewContainer'>
+                    <p className='reviewAuthor'>{getAuthorName(review.user_id)}</p>
+                    <p className='reviewContent'>{review.content}</p>
+                  </div>
+                ))}
+          </div>}
         </div>
       </div>
     );
