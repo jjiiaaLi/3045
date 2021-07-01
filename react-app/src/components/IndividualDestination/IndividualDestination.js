@@ -4,11 +4,13 @@ import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
+import { getDestinationReviews, postAReview } from "../../store/reviews";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
     const {id}=useParams()
     const [lodgingAttributes, setLodgingAttributes]=useState('')
+    const [reviewContent, setReviewContent]=useState('')
     const dispatch=useDispatch()
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
@@ -33,6 +35,11 @@ export default function IndividualDestination() {
       
     }
     
+    const submitReview=async(e)=>{
+      e.preventDefault()
+      
+      await dispatch(postAReview(Number(id),destination[0].id,reviewContent))
+    }
 
     return (
       <div className="individualDestContainer">
@@ -121,6 +128,14 @@ export default function IndividualDestination() {
             _________________________________________________________________________________________________________________________________________________________
           </p>
           <p className='reviewLabel'>Reviews</p>
+          <button className='reviewButton'>Write a Review</button>
+          <form className='reviewForm' onSubmit={submitReview}>
+                <div>
+                   <label className='formLabel'>{destination[0]?.name}</label>
+                  <textarea type='text' value={reviewContent} name='reviewContent' onChange={e=>{setReviewContent(e.target.value)}} />
+                  <button type='submit'>Submit Review</button>
+                </div>
+          </form>
         </div>
       </div>
     );
