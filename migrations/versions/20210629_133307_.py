@@ -40,6 +40,7 @@ def upgrade():
     sa.Column('attributes', sa.String(), nullable=False),
     sa.Column('destination_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['destination_id'], ['destinations.id'], ),
+    sa.Column('image', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('lodgings',

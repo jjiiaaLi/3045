@@ -17,7 +17,7 @@ def seed_lodgings():
 
     db.session.commit()
 
-    newYork3 = Lodging(name='Star Lounge', attributes='For those with credits to spar,Themed to your liking,Includes in house maintenace drones',
+    newYork3 = Lodging(name='Star Lounge', attributes='For those with credits to spare,Themed to your liking,Includes in house maintenace drones',
                 destination_id=1, image='https://miro.medium.com/max/625/1*DSGTtsBCk8whguVFp45eVQ.jpeg')
 
     db.session.add(newYork3)
