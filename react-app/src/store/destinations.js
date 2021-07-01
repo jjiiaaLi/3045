@@ -18,7 +18,7 @@ const getSingleDest = (destination)=>({
 
 
 export const loadPopDest=()=>async (dispatch)=>{
-    const res= await fetch('/api/destinations/')
+    const res= await fetch('/api/destinations')
 
     if (res.ok){
         const data=await res.json()
