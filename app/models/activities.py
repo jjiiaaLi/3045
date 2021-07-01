@@ -11,3 +11,11 @@ class Activity(db.Model):
     
     destinations=db.relationship("Destination", back_populates='activities')
     
+    def to_dict(self):
+        return {
+        "id": self.id,
+        "name": self.name,
+        "attributes": self.attributes,
+        "destination_id":self.destination_id,
+        "image":self.image
+        }

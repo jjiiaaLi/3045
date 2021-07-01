@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
+import { loadDestinationActivities } from "../../store/activities";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
@@ -11,10 +12,12 @@ export default function IndividualDestination() {
     const dispatch=useDispatch()
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
-    
+    const activities=useSelector(state=>Object.values(state.activities))
+
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
         dispatch(loadLodgings(Number(id)))
+        dispatch(loadDestinationActivities(Number(id)))
     },[dispatch])
 
     
@@ -26,7 +29,7 @@ export default function IndividualDestination() {
     let lodgingAttributeList
     if(lodgingAttributes.length){
       lodgingAttributeList=lodgingAttributes.split(',')
-      console.log(lodgingAttributeList)
+      
     }
     
 
