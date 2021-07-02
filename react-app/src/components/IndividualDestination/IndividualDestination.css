@@ -186,8 +186,8 @@
 }
 
 .reviewAuthorImg{
-    height:65px;
-    width: 65px;
+    height:62px;
+    width: 62px;
     border-style:hidden;
     border-radius: 50%;
     box-shadow: 8px 8px 5px gray;
@@ -199,6 +199,7 @@
     width:1230px;
     display: flex;
     flex-wrap: wrap;
+   
 }
 
 .eachReviewContainer{
@@ -231,4 +232,119 @@
 
 .eachReviewContainer:hover{
     transform: scale(1.2);
+}
+
+.reviewFormContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.reviewFormUserImg{
+    border-radius: 50%;
+    height:75px;
+    width: 75px;
+    background-color: rgb(233, 233, 233);
+    box-shadow: 8px 8px 5px rgb(172, 172, 172);
+}
+
+.reviewFormTextarea{
+    width:1050px;
+    margin-left: 50px;
+    border:none;
+    border-bottom: 2px solid rgb(155, 155, 155);
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17.5px;
+}
+
+.submitReviewBtn{
+    margin-top:5px;
+    margin-left: 980px;
+    border:none;
+    width:120px;
+    height:34px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.editReviewBtn {
+    border:none;
+    width:120px;
+    height:34px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    cursor:pointer;
+}
+
+.deleteThisReview{
+    border:none;
+    width:120px;
+    height:34px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background-color: white;
+    cursor:pointer;
+}
+
+.editForm{
+    position:relative;
+    width:700px;
+    height:300px;
+    margin-top: -460px;
+    margin-left: 250px;
+    animation-duration: .6s;
+    animation-name: slidein;
+    background-color: rgb(31, 88, 172);
+    border-radius: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    opacity: .95;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: -100%;
+    width: 100%;
+  }
+  to {
+    margin-right: 100%;
+    width: 57%;
+  }
+}
+
+.editTextarea{
+    margin-top: 20px;
+    margin-left: 70px;
+    width:550px;
+    height:150px;
+    border:none;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+}
+
+.editFormSubmit{
+    width: 120px;
+    height:30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: rgb(91, 91, 91);
+    border-radius: 9px;
+    border-style: hidden;
+    margin-left: 288px;
+    color:ivory;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.editFormLabel{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color:rgb(182, 182, 182);
+    margin-left: 288px;
+    margin-top: 30px;
 }

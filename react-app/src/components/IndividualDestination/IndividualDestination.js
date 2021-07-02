@@ -13,7 +13,6 @@ export default function IndividualDestination() {
     const [lodgingAttributes, setLodgingAttributes]=useState('')
     const [reviewContent, setReviewContent]=useState('')
     const [editContent, setEditContent]=useState('')
-    const [showReviewBox, setShowReviewBox]=useState(false)
     const [showEditBox, setShowEditBox]=useState(false)
     const [reviewToEditId,setReviewToEditId]=useState(null)
     const dispatch=useDispatch()
@@ -70,7 +69,6 @@ export default function IndividualDestination() {
         postAReview(Number(user[0].id), destination[0].id, reviewContent)
       );
       setReviewContent("");
-      setShowReviewBox(false);
     };
    
     const editReview=async(e)=>{
@@ -149,114 +147,113 @@ export default function IndividualDestination() {
               </li>
             </ul>
           )}
-          <p className="individualDestDividerLine">
-            _________________________________________________________________________________________________________________________________________________________
-          </p>
-          <p className="individualDestSummaryLabel">Near By Attractions</p>
-          <div className="activitiesContainer">
-            {activities &&
-              activities.map((activity) => (
-                <div className="individualActivityContainer">
-                  <img className="activityImage" src={activity.image} />
-                  <div>
-                    <p className="activityName">{activity.name}</p>
-                    <p className="activitySummary">{activity.attributes}</p>
-                  </div>
-                </div>
-              ))}
-          </div>
-          <p className="individualDestDividerLine">
-            _________________________________________________________________________________________________________________________________________________________
-          </p>
-          <p className="reviewLabel">Reviews</p>
-          <button
-            onClick={(e) => {
-              setShowReviewBox(true);
-            }}
-            className="reviewButton"
-          >
-            Write a Review
-          </button>
-          {showReviewBox && (
-            <form className="reviewForm" onSubmit={submitReview}>
-              <div>
-                <textarea
-                  type="text"
-                  value={reviewContent}
-                  name="reviewContent"
-                  onChange={(e) => {
-                    setReviewContent(e.target.value);
-                  }}
-                />
-
-                <button type="submit">Submit Review</button>
-              </div>
-            </form>
-          )}
-          {reviews && (
-            <div className="displayReviewsContainer">
-              {reviews.map((review) => (
-                <div className="eachReviewContainer">
-                  <div className="eachReviewTopDiv">
-                    <img
-                      alt="reviewAuthor"
-                      className="reviewAuthorImg"
-                      src={getAuthorImg(review.user_id)}
-                    />
-                    <p className="reviewAuthor">
-                      {getAuthorName(review.user_id)}
-                    </p>
-                  </div>
-                  <p className="reviewContent">{review.content}</p>
-                  {review.user_id === user[0].id && (
-                    <div>
-                      <button
-                        value={review.content}
-                        onClick={(e) => {
-                          setEditContent(e.target.value);
-                          setShowEditBox(true);
-                          reviews.forEach((review) => {
-                            if (e.target.value === review.content) {
-                              setReviewToEditId(review.id);
-                            }
-                          });
-                        }}
-                        className="editReviewBtn"
-                      >
-                        edit my review
-                      </button>
-                      <button
-                        className="deleteThisReview"
-                        value={review.id}
-                        onClick={(e) => {
-                          dispatch(deleteReview(destination[0].id,e.target.value));
-                          
-                        }}
-                      >
-                        Delete my review
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))}
-              {showEditBox && (
-                <form className="editForm" onSubmit={editReview}>
-                  <label className="editFormLabel">edit this review</label>
-                  <textarea
-                    value={editContent}
-                    onChange={(e) => {
-                      setEditContent(e.target.value);
-                    }}
-                    placeholder={editContent}
-                  ></textarea>
-                  <button className="editFormSubmit" type="submit">
-                    Submit Edit
-                  </button>
-                </form>
-              )}
-            </div>
-          )}
         </div>
+        <p className="individualDestDividerLine">
+          _________________________________________________________________________________________________________________________________________________________
+        </p>
+        <p className="individualDestSummaryLabel">Near By Attractions</p>
+        <div className="activitiesContainer">
+          {activities &&
+            activities.map((activity) => (
+              <div className="individualActivityContainer">
+                <img className="activityImage" src={activity.image} />
+                <div>
+                  <p className="activityName">{activity.name}</p>
+                  <p className="activitySummary">{activity.attributes}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+        <p className="individualDestDividerLine">
+          _________________________________________________________________________________________________________________________________________________________
+        </p>
+        <p className="reviewLabel">Reviews</p>
+        <div className="reviewFormContainer">
+          <img className="reviewFormUserImg" src={user[0].image} />
+          <form className="reviewForm" onSubmit={submitReview}>
+            <div>
+              <textarea
+                className="reviewFormTextarea"
+                type="text"
+                value={reviewContent}
+                name="reviewContent"
+                onChange={(e) => {
+                  setReviewContent(e.target.value);
+                }}
+              />
+              <button className="submitReviewBtn" type="submit">
+                Comment
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {reviews && (
+          <div className="displayReviewsContainer">
+            {reviews.map((review) => (
+              <div className="eachReviewContainer">
+                <div className="eachReviewTopDiv">
+                  <img
+                    alt="reviewAuthor"
+                    className="reviewAuthorImg"
+                    src={getAuthorImg(review.user_id)}
+                  />
+                  <p className="reviewAuthor">
+                    {getAuthorName(review.user_id)}
+                  </p>
+                </div>
+                <p className="reviewContent">{review.content}</p>
+                {review.user_id === user[0].id && (
+                  <div>
+                    <button
+                      value={review.content}
+                      onClick={(e) => {
+                        setEditContent(e.target.value);
+                        setShowEditBox(true);
+                        reviews.forEach((review) => {
+                          if (e.target.value === review.content) {
+                            setReviewToEditId(review.id);
+                          }
+                        });
+                      }}
+                      className="editReviewBtn"
+                    >
+                      edit my review
+                    </button>
+                    <button
+                      className="deleteThisReview"
+                      value={review.id}
+                      onClick={(e) => {
+                        dispatch(
+                          deleteReview(destination[0].id, e.target.value)
+                        );
+                      }}
+                    >
+                      Delete 
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showEditBox && (
+          <form className="editForm" onSubmit={editReview}>
+            <label className="editFormLabel">Edit this review</label>
+            <textarea
+              className='editTextarea'
+              value={editContent}
+              onChange={(e) => {
+                setEditContent(e.target.value);
+              }}
+              placeholder={editContent}
+            ></textarea>
+            <button className="editFormSubmit" type="submit">
+              Submit Edit
+            </button>
+          </form>
+        )}
       </div>
     );
 }
