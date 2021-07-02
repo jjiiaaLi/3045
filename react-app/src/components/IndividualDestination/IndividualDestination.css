@@ -149,7 +149,7 @@
     box-shadow: 5px 5px 5px gray;
     margin:13px;
     margin-top: 30px;
-    transition: .8s;
+    transition: .5s;
 }
 
 .activityImage{
@@ -183,4 +183,12 @@
 .reviewLabel{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
+}
+
+.reviewAuthorImg{
+    height:80px;
+    width: 80px;
+    border-style:hidden;
+    border-radius: 50%;
+    box-shadow: 8px 8px 5px gray;
 }

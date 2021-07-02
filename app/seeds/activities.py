@@ -37,7 +37,7 @@ def seed_activities():
 
     db.session.commit()
 
-    SFactivity2 = Activity(name='Above Ground Santuary', attributes='Last remaining areas still untouched by the ever encroaching water table.  Stroll through the ancient population storages and ponder upon what it must have been like to be a creator unit in the B.A',
+    SFactivity2 = Activity(name='Above Ground Santuary', attributes='Last remaining areas still untouched by the ever encroaching water table.  Stroll through the ancient population storages and ponder upon what it must have been like to be a creator unit in the P.S',
                 destination_id=2, image='https://i.pinimg.com/originals/2b/37/51/2b375107ac6d109c57d56c67bc21b9ac.png')
 
     db.session.add(SFactivity2)

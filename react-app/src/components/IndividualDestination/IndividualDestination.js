@@ -12,13 +12,15 @@ export default function IndividualDestination() {
     const {id}=useParams()
     const [lodgingAttributes, setLodgingAttributes]=useState('')
     const [reviewContent, setReviewContent]=useState('')
+    const [showModal, setShowModal]=useState(false)
     const dispatch=useDispatch()
+    const user=useSelector(state=>Object.values(state.session))
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
     const activities=useSelector(state=>Object.values(state.activities))
     const reviews=useSelector(state=>Object.values(state.reviews))
     const users=useSelector(state=>Object.values(state.users))
-
+    
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
         dispatch(loadLodgings(Number(id)))
@@ -36,13 +38,13 @@ export default function IndividualDestination() {
     let lodgingAttributeList
     if(lodgingAttributes.length){
       lodgingAttributeList=lodgingAttributes.split(',')
-      
     }
     
     const submitReview=async(e)=>{
       e.preventDefault()
       
-      await dispatch(postAReview(Number(id),destination[0].id,reviewContent))
+      await dispatch(postAReview(Number(user[0].id), destination[0].id, reviewContent));
+      setReviewContent('')
     }
 
     const getAuthorName=(user_id)=>{
@@ -51,6 +53,21 @@ export default function IndividualDestination() {
           return user.username
         }
       })
+    }
+
+    const getAuthorImg=(user_id)=>{
+      let userImg
+      users.forEach(user=>{
+        if(user.id===user_id){
+          userImg= user.image
+        }
+      })
+      return userImg
+    }
+   
+    const editReview=async(e)=>{
+      e.preventDefault()
+      return 1
     }
 
     return (
@@ -139,26 +156,54 @@ export default function IndividualDestination() {
           <p className="individualDestDividerLine">
             _________________________________________________________________________________________________________________________________________________________
           </p>
-          <p className='reviewLabel'>Reviews</p>
-          <button className='reviewButton'>Write a Review</button>
-          <form className='reviewForm' onSubmit={submitReview}>
-                <div>
-                   <label className='formLabel'>{destination[0]?.name}</label>
-                  <textarea type='text' value={reviewContent} name='reviewContent' onChange={e=>{setReviewContent(e.target.value)}} />
-                  <button type='submit'>Submit Review</button>
-                </div>
+          <p className="reviewLabel">Reviews</p>
+          <button className="reviewButton">Write a Review</button>
+          <form className="reviewForm" onSubmit={submitReview}>
+            <div>
+              <label className="formLabel">{destination[0]?.name}</label>
+              <textarea
+                type="text"
+                value={reviewContent}
+                name="reviewContent"
+                onChange={(e) => {
+                  setReviewContent(e.target.value);
+                }}
+              />
+              <button type="submit">Submit Review</button>
+            </div>
           </form>
-          {reviews&&<div className='displayReviewsContainer'>
-                {reviews.map(review=>(
-                  <div className='eachReviewContainer'>
-                    <p className='reviewAuthor'>{getAuthorName(review.user_id)}</p>
-                    <p className='reviewContent'>{review.content}</p>
-                  </div>
-                ))}
-          </div>}
+          {reviews && (
+            <div className="displayReviewsContainer">
+              {reviews.map((review) => (
+                <div className="eachReviewContainer">
+                  <img
+                    alt="reviewAuthor"
+                    className="reviewAuthorImg"
+                    src={getAuthorImg(review.user_id)}
+                  />
+                  <p className="reviewAuthor">
+                    {getAuthorName(review.user_id)}
+                  </p>
+                  <p className="reviewContent">{review.content}</p>
+                  {review.user_id === user[0].id && (
+                    <button
+                      value={review.content}
+                      onClick={e=>{setReviewContent(e.target.value)}}
+                      className="editReviewBtn"
+                    >
+                      edit my review
+                    </button>
+                  )}
+                </div>
+              ))}
+              <form className='editForm' onSubmit={editReview}>
+                <label className='editFormLabel'>edit this review</label>
+                <textarea placeholder={reviewContent} ></textarea>
+                <button className='editFormSubmit' type='submit'>Submit Edit</button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     );
-
-    
 }
