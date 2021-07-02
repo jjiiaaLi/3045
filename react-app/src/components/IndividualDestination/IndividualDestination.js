@@ -4,21 +4,31 @@ import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
+import { getDestinationReviews, postAReview, editAReview,deleteReview } from "../../store/reviews";
+import { grabUsers } from "../../store/users";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
     const {id}=useParams()
     const [lodgingAttributes, setLodgingAttributes]=useState('')
+    const [reviewContent, setReviewContent]=useState('')
+    const [editContent, setEditContent]=useState('')
+    const [showEditBox, setShowEditBox]=useState(false)
+    const [reviewToEditId,setReviewToEditId]=useState(null)
     const dispatch=useDispatch()
+    const user=useSelector(state=>Object.values(state.session))
     const destination=useSelector(state=>Object.values(state.destinations))
     const lodgings=useSelector(state=>Object.values(state.lodgings))
     const activities=useSelector(state=>Object.values(state.activities))
+    const reviews=useSelector(state=>Object.values(state.reviews))
+    const users=useSelector(state=>Object.values(state.users))
     
-
     useEffect(()=>{
         dispatch(loadSingleDest(Number(id)))
         dispatch(loadLodgings(Number(id)))
         dispatch(loadDestinationActivities(Number(id)))
+        dispatch(getDestinationReviews(Number(id)))
+        dispatch(grabUsers())
     },[dispatch])
 
     
@@ -30,9 +40,45 @@ export default function IndividualDestination() {
     let lodgingAttributeList
     if(lodgingAttributes.length){
       lodgingAttributeList=lodgingAttributes.split(',')
-      
     }
     
+    
+
+    const getAuthorName=(user_id)=>{
+      return users.map(user=>{
+        if(user.id===user_id){
+          return user.username
+        }
+      })
+    }
+
+    const getAuthorImg=(user_id)=>{
+      let userImg
+      users.forEach(user=>{
+        if(user.id===user_id){
+          userImg= user.image
+        }
+      })
+      return userImg
+    }
+
+    const submitReview = async (e) => {
+      e.preventDefault();
+
+      await dispatch(
+        postAReview(Number(user[0].id), destination[0].id, reviewContent)
+      );
+      setReviewContent("");
+    };
+   
+    const editReview=async(e)=>{
+      e.preventDefault();
+      
+      await dispatch(
+        editAReview(destination[0].id, reviewToEditId, editContent)
+      );
+      setShowEditBox(false)
+    }
 
     return (
       <div className="individualDestContainer">
@@ -101,29 +147,113 @@ export default function IndividualDestination() {
               </li>
             </ul>
           )}
-          <p className="individualDestDividerLine">
-            _________________________________________________________________________________________________________________________________________________________
-          </p>
-          <p className="individualDestSummaryLabel">Near By Attractions</p>
-          <div className="activitiesContainer">
-            {activities &&
-              activities.map((activity) => (
-                <div className="individualActivityContainer">
-                  <img className="activityImage" src={activity.image} />
-                  <div>
-                    <p className="activityName">{activity.name}</p>
-                    <p className="activitySummary">{activity.attributes}</p>
-                  </div>
-                </div>
-              ))}
-          </div>
-          <p className="individualDestDividerLine">
-            _________________________________________________________________________________________________________________________________________________________
-          </p>
-          <p className='reviewLabel'>Reviews</p>
         </div>
+        <p className="individualDestDividerLine">
+          _________________________________________________________________________________________________________________________________________________________
+        </p>
+        <p className="individualDestSummaryLabel">Near By Attractions</p>
+        <div className="activitiesContainer">
+          {activities &&
+            activities.map((activity) => (
+              <div className="individualActivityContainer">
+                <img className="activityImage" src={activity.image} />
+                <div>
+                  <p className="activityName">{activity.name}</p>
+                  <p className="activitySummary">{activity.attributes}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+        <p className="individualDestDividerLine">
+          _________________________________________________________________________________________________________________________________________________________
+        </p>
+        <p className="reviewLabel">Reviews</p>
+        <div className="reviewFormContainer">
+          <img className="reviewFormUserImg" src={user[0].image} />
+          <form className="reviewForm" onSubmit={submitReview}>
+            <div>
+              <textarea
+                className="reviewFormTextarea"
+                type="text"
+                value={reviewContent}
+                name="reviewContent"
+                onChange={(e) => {
+                  setReviewContent(e.target.value);
+                }}
+              />
+              <button className="submitReviewBtn" type="submit">
+                Comment
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {reviews && (
+          <div className="displayReviewsContainer">
+            {reviews.map((review) => (
+              <div className="eachReviewContainer">
+                <div className="eachReviewTopDiv">
+                  <img
+                    alt="reviewAuthor"
+                    className="reviewAuthorImg"
+                    src={getAuthorImg(review.user_id)}
+                  />
+                  <p className="reviewAuthor">
+                    {getAuthorName(review.user_id)}
+                  </p>
+                </div>
+                <p className="reviewContent">{review.content}</p>
+                {review.user_id === user[0].id && (
+                  <div>
+                    <button
+                      value={review.content}
+                      onClick={(e) => {
+                        setEditContent(e.target.value);
+                        setShowEditBox(true);
+                        reviews.forEach((review) => {
+                          if (e.target.value === review.content) {
+                            setReviewToEditId(review.id);
+                          }
+                        });
+                      }}
+                      className="editReviewBtn"
+                    >
+                      edit my review
+                    </button>
+                    <button
+                      className="deleteThisReview"
+                      value={review.id}
+                      onClick={(e) => {
+                        dispatch(
+                          deleteReview(destination[0].id, e.target.value)
+                        );
+                      }}
+                    >
+                      Delete 
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showEditBox && (
+          <form className="editForm" onSubmit={editReview}>
+            <label className="editFormLabel">Edit this review</label>
+            <textarea
+              className='editTextarea'
+              value={editContent}
+              onChange={(e) => {
+                setEditContent(e.target.value);
+              }}
+              placeholder={editContent}
+            ></textarea>
+            <button className="editFormSubmit" type="submit">
+              Submit Edit
+            </button>
+          </form>
+        )}
       </div>
     );
-
-    
 }
