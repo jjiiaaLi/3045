@@ -63,7 +63,7 @@ const LoginForm = () => {
         />
         <button type="submit">Login</button>
       </div>
-      <button className='demoUserBtn' onClick={demoLogin} >Login As DemoUser</button>
+      <button className='demoUserBtn' onClick={demoLogin} >Login As DemoBot</button>
     </form>
   );
 };

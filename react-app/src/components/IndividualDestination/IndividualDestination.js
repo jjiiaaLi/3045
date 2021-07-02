@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
-import { getDestinationReviews, postAReview } from "../../store/reviews";
+import { getDestinationReviews, postAReview, editAReview } from "../../store/reviews";
 import { grabUsers } from "../../store/users";
 import "./IndividualDestination.css";
 
@@ -12,7 +12,10 @@ export default function IndividualDestination() {
     const {id}=useParams()
     const [lodgingAttributes, setLodgingAttributes]=useState('')
     const [reviewContent, setReviewContent]=useState('')
-    const [showModal, setShowModal]=useState(false)
+    const [editContent, setEditContent]=useState('')
+    const [showReviewBox, setShowReviewBox]=useState(false)
+    const [showEditBox, setShowEditBox]=useState(false)
+    const [reviewToEditId,setReviewToEditId]=useState(null)
     const dispatch=useDispatch()
     const user=useSelector(state=>Object.values(state.session))
     const destination=useSelector(state=>Object.values(state.destinations))
@@ -40,12 +43,7 @@ export default function IndividualDestination() {
       lodgingAttributeList=lodgingAttributes.split(',')
     }
     
-    const submitReview=async(e)=>{
-      e.preventDefault()
-      
-      await dispatch(postAReview(Number(user[0].id), destination[0].id, reviewContent));
-      setReviewContent('')
-    }
+    
 
     const getAuthorName=(user_id)=>{
       return users.map(user=>{
@@ -64,10 +62,24 @@ export default function IndividualDestination() {
       })
       return userImg
     }
+
+    const submitReview = async (e) => {
+      e.preventDefault();
+
+      await dispatch(
+        postAReview(Number(user[0].id), destination[0].id, reviewContent)
+      );
+      setReviewContent("");
+      setShowReviewBox(false);
+    };
    
     const editReview=async(e)=>{
-      e.preventDefault()
-      return 1
+      e.preventDefault();
+      
+      await dispatch(
+        editAReview(destination[0].id, reviewToEditId, editContent)
+      );
+      setShowEditBox(false)
     }
 
     return (
@@ -157,10 +169,9 @@ export default function IndividualDestination() {
             _________________________________________________________________________________________________________________________________________________________
           </p>
           <p className="reviewLabel">Reviews</p>
-          <button className="reviewButton">Write a Review</button>
-          <form className="reviewForm" onSubmit={submitReview}>
+          <button onClick={e=>{setShowReviewBox(true)}} className="reviewButton">Write a Review</button>
+          {showReviewBox&&<form className="reviewForm" onSubmit={submitReview}>
             <div>
-              <label className="formLabel">{destination[0]?.name}</label>
               <textarea
                 type="text"
                 value={reviewContent}
@@ -169,26 +180,37 @@ export default function IndividualDestination() {
                   setReviewContent(e.target.value);
                 }}
               />
-              <button type="submit">Submit Review</button>
+              
+              <button  type="submit">Submit Review</button>
             </div>
-          </form>
+          </form>}
           {reviews && (
             <div className="displayReviewsContainer">
               {reviews.map((review) => (
                 <div className="eachReviewContainer">
-                  <img
-                    alt="reviewAuthor"
-                    className="reviewAuthorImg"
-                    src={getAuthorImg(review.user_id)}
-                  />
-                  <p className="reviewAuthor">
-                    {getAuthorName(review.user_id)}
-                  </p>
+                  <div className="eachReviewTopDiv">
+                    <img
+                      alt="reviewAuthor"
+                      className="reviewAuthorImg"
+                      src={getAuthorImg(review.user_id)}
+                    />
+                    <p className="reviewAuthor">
+                      {getAuthorName(review.user_id)}
+                    </p>
+                  </div>
                   <p className="reviewContent">{review.content}</p>
                   {review.user_id === user[0].id && (
                     <button
                       value={review.content}
-                      onClick={e=>{setReviewContent(e.target.value)}}
+                      onClick={(e) => {
+                        setEditContent(e.target.value);
+                        setShowEditBox(true);
+                        reviews.forEach(review=>{
+                          if(e.target.value===review.content){
+                            setReviewToEditId(review.id)
+                          }
+                        })
+                      }}
                       className="editReviewBtn"
                     >
                       edit my review
@@ -196,11 +218,13 @@ export default function IndividualDestination() {
                   )}
                 </div>
               ))}
-              <form className='editForm' onSubmit={editReview}>
-                <label className='editFormLabel'>edit this review</label>
-                <textarea placeholder={reviewContent} ></textarea>
-                <button className='editFormSubmit' type='submit'>Submit Edit</button>
-              </form>
+              {showEditBox&&<form className="editForm" onSubmit={editReview}>
+                <label className="editFormLabel">edit this review</label>
+                <textarea value={editContent} onChange={e=>{setEditContent(e.target.value)}} placeholder={editContent}></textarea>
+                <button className="editFormSubmit" type="submit">
+                  Submit Edit
+                </button>
+              </form>}
             </div>
           )}
         </div>

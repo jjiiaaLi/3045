@@ -11,10 +11,6 @@ const loadDestReviews=(reviews)=>({
 
 
 
-
-
-
-
 export const getDestinationReviews=(id)=>async(dispatch)=>{
     const res=await fetch(`/api/reviews/${id}`)
     if(res.ok){
@@ -31,6 +27,20 @@ export const postAReview=(user_id,destination_id,content)=>async(dispatch)=>{
             'Content-Type':'application/json'
         },
         body:JSON.stringify({user_id,destination_id,content})
+    })
+    if(res.ok){
+        const data=await res.json()
+        dispatch(loadDestReviews(data));
+    }
+}
+
+
+export const editAReview=(destination_id,review_id,content)=>async(dispatch)=>{
+
+    const res=await fetch('/api/reviews/editAReview',{
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({destination_id,review_id,content})
     })
     if(res.ok){
         const data=await res.json()

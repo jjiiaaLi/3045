@@ -21,6 +21,7 @@
     border-radius: 27px;
     border-style: hidden;
     overflow: hidden;
+    
 }
 
 .individualDestOtherPicsContainer{
@@ -42,7 +43,6 @@
     padding-bottom: 10px;
     margin-right:0px;
     object-fit: cover;
-
 }
 
 
@@ -186,9 +186,49 @@
 }
 
 .reviewAuthorImg{
-    height:80px;
-    width: 80px;
+    height:65px;
+    width: 65px;
     border-style:hidden;
     border-radius: 50%;
     box-shadow: 8px 8px 5px gray;
+    margin:5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.displayReviewsContainer{
+    width:1230px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.eachReviewContainer{
+    width:600px;
+    height: 150px;
+    transition: .5s;
+}
+
+.eachReviewTopDiv{
+    display: flex;
+    flex-direction: row;
+}
+
+.reviewAuthor{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 45px;
+}
+
+.reviewContent{
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(116, 114, 114);
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 120px;
+    margin-top: -15px;
+    width:300px;
+}
+
+.eachReviewContainer:hover{
+    transform: scale(1.2);
 }
