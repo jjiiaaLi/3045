@@ -42,3 +42,17 @@ def edit_review():
     db.session.commit()
     reviews=Review.query.filter_by(destination_id=destination_id)
     return {'reviews':[review.to_dict() for review in reviews]}
+
+
+@review_routes.route('/delete/<int:review_id>', methods=['DELETE'])
+def delete_review(review_id):
+    req_data=json.loads(request.data.decode('utf-8'))
+    destination_id=req_data['destination_id']
+    data=Review.query.filter_by(id=review_id).first()
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',destination_id)
+    db.session.delete(data)
+    db.session.commit()
+
+    reviews=Review.query.filter_by(destination_id=destination_id)
+    return {'reviews':[review.to_dict() for review in reviews]}
+    

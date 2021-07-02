@@ -49,6 +49,18 @@ export const editAReview=(destination_id,review_id,content)=>async(dispatch)=>{
 }
 
 
+export const deleteReview=(destination_id,review_id)=>async(dispatch)=>{
+    const res = await fetch(`/api/reviews/delete/${review_id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body:JSON.stringify({destination_id})
+    });
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(loadDestReviews(data));
+    }
+}
+
 
 export default function reviewReducer(state={}, action){
     let newState={}

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import {loadSingleDest} from '../../store/destinations';
 import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
-import { getDestinationReviews, postAReview, editAReview } from "../../store/reviews";
+import { getDestinationReviews, postAReview, editAReview,deleteReview } from "../../store/reviews";
 import { grabUsers } from "../../store/users";
 import "./IndividualDestination.css";
 
@@ -169,21 +169,30 @@ export default function IndividualDestination() {
             _________________________________________________________________________________________________________________________________________________________
           </p>
           <p className="reviewLabel">Reviews</p>
-          <button onClick={e=>{setShowReviewBox(true)}} className="reviewButton">Write a Review</button>
-          {showReviewBox&&<form className="reviewForm" onSubmit={submitReview}>
-            <div>
-              <textarea
-                type="text"
-                value={reviewContent}
-                name="reviewContent"
-                onChange={(e) => {
-                  setReviewContent(e.target.value);
-                }}
-              />
-              
-              <button  type="submit">Submit Review</button>
-            </div>
-          </form>}
+          <button
+            onClick={(e) => {
+              setShowReviewBox(true);
+            }}
+            className="reviewButton"
+          >
+            Write a Review
+          </button>
+          {showReviewBox && (
+            <form className="reviewForm" onSubmit={submitReview}>
+              <div>
+                <textarea
+                  type="text"
+                  value={reviewContent}
+                  name="reviewContent"
+                  onChange={(e) => {
+                    setReviewContent(e.target.value);
+                  }}
+                />
+
+                <button type="submit">Submit Review</button>
+              </div>
+            </form>
+          )}
           {reviews && (
             <div className="displayReviewsContainer">
               {reviews.map((review) => (
@@ -200,31 +209,51 @@ export default function IndividualDestination() {
                   </div>
                   <p className="reviewContent">{review.content}</p>
                   {review.user_id === user[0].id && (
-                    <button
-                      value={review.content}
-                      onClick={(e) => {
-                        setEditContent(e.target.value);
-                        setShowEditBox(true);
-                        reviews.forEach(review=>{
-                          if(e.target.value===review.content){
-                            setReviewToEditId(review.id)
-                          }
-                        })
-                      }}
-                      className="editReviewBtn"
-                    >
-                      edit my review
-                    </button>
+                    <div>
+                      <button
+                        value={review.content}
+                        onClick={(e) => {
+                          setEditContent(e.target.value);
+                          setShowEditBox(true);
+                          reviews.forEach((review) => {
+                            if (e.target.value === review.content) {
+                              setReviewToEditId(review.id);
+                            }
+                          });
+                        }}
+                        className="editReviewBtn"
+                      >
+                        edit my review
+                      </button>
+                      <button
+                        className="deleteThisReview"
+                        value={review.id}
+                        onClick={(e) => {
+                          dispatch(deleteReview(destination[0].id,e.target.value));
+                          
+                        }}
+                      >
+                        Delete my review
+                      </button>
+                    </div>
                   )}
                 </div>
               ))}
-              {showEditBox&&<form className="editForm" onSubmit={editReview}>
-                <label className="editFormLabel">edit this review</label>
-                <textarea value={editContent} onChange={e=>{setEditContent(e.target.value)}} placeholder={editContent}></textarea>
-                <button className="editFormSubmit" type="submit">
-                  Submit Edit
-                </button>
-              </form>}
+              {showEditBox && (
+                <form className="editForm" onSubmit={editReview}>
+                  <label className="editFormLabel">edit this review</label>
+                  <textarea
+                    value={editContent}
+                    onChange={(e) => {
+                      setEditContent(e.target.value);
+                    }}
+                    placeholder={editContent}
+                  ></textarea>
+                  <button className="editFormSubmit" type="submit">
+                    Submit Edit
+                  </button>
+                </form>
+              )}
             </div>
           )}
         </div>
