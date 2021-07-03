@@ -254,6 +254,10 @@ export default function IndividualDestination() {
             </button>
           </form>
         )}
+
+        <div className='bookingContainer'>
+              <h1>this is the booking container</h1>
+        </div>
       </div>
     );
 }

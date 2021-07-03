@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
   image=db.Column(db.String, nullable=False)
 
   reviews=db.relationship("Review", back_populates='users')
+  bookings=db.relationship('Booking', back_populates='users')
 
   @property
   def password(self):
