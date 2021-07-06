@@ -11,6 +11,7 @@ export default function Booking(){
     const [dropDate,setDropDate]=useState(new Date("3045-01-08"));
     const [extractionDate, setExtractionDate]=useState(new Date('3045-01-09'));
     const [lodging, setLodging]=useState(null);
+    const [activitiesToSubmit, setActivitiesToSubmit]=useState([]);
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
     
@@ -25,14 +26,27 @@ export default function Booking(){
     const handleExtractionSelect=(date)=>{
         setExtractionDate(date);
     }
-
-
     
     const Submit=(e)=>{
         e.preventDefault();
-        console.log(lodging)
+        console.log(lodging);
+        console.log(activitiesToSubmit);
     }
     
+    const updateActivities=(activityName)=>{
+        if(activitiesToSubmit.includes(activityName)){
+            setActivitiesToSubmit(currentArray=>{
+                const newArray=currentArray.filter(activity=>activity!==activityName)
+                return newArray
+            })
+        }
+        else{
+            setActivitiesToSubmit(currentArray=>[...currentArray,activityName])
+        }
+        
+    };
+   
+
     return (
       <div>
         <div className="DateSelectContainer">
@@ -53,7 +67,7 @@ export default function Booking(){
           <button value={lodging} className="selectLodgingBtn">
             {selectedLodging}
           </button>
-          
+
           <div className="lodgingOptions">
             {lodgings && (
               <div className="lodgingContent">
@@ -62,7 +76,6 @@ export default function Booking(){
                     value={lodging.name}
                     onClick={(e) => {
                       setLodging(e.target.value);
-                      
                     }}
                     className="lodgingNames"
                   >
@@ -73,8 +86,13 @@ export default function Booking(){
             )}
           </div>
         </div>
-        <div className='bookingActivitiesContainer'>
-
+        <div className="bookingActivitiesContainer">
+          {activities.map((activity) => (
+            <div>
+              <input type="checkbox" id={activity.id} value={activity.name} onChange={e=>updateActivities(e.target.value)} />
+              <label for={activity.id}>{activity.name}</label>
+            </div>
+          ))}
         </div>
         <button onClick={Submit}>Confirm</button>
       </div>
