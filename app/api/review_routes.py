@@ -12,7 +12,6 @@ def get_reviews(id):
     return {'reviews':[review.to_dict() for review in reviews]}
 
 
-
 @review_routes.route('/postReview', methods=["POST"])
 def post_review():
     form=ReviewForm()

@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { postABooking } from '../../store/bookings';
 import './Booking.css';
 //learned to use the datepicker package by looking up and learning from the documentation
 import DatePicker from 'react-datepicker'
@@ -12,26 +13,16 @@ export default function Booking(){
     const [extractionDate, setExtractionDate]=useState(new Date('3045-01-09'));
     const [lodging, setLodging]=useState(null);
     const [activitiesToSubmit, setActivitiesToSubmit]=useState([]);
+    const user = useSelector((state) => Object.values(state.session));
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
+    const destination = useSelector((state) =>Object.values(state.destinations));
     
     let selectedLodging='Select Lodging'
     if(lodging){
         selectedLodging=lodging
     }
     
-    const handleDropSelect=(date)=>{
-        setDropDate(date);
-    }
-    const handleExtractionSelect=(date)=>{
-        setExtractionDate(date);
-    }
-    
-    const Submit=(e)=>{
-        e.preventDefault();
-        console.log(lodging);
-        console.log(activitiesToSubmit);
-    }
     
     const updateActivities=(activityName)=>{
         if(activitiesToSubmit.includes(activityName)){
@@ -45,7 +36,21 @@ export default function Booking(){
         }
         
     };
-   
+
+    const processDate=(unformatedDate)=>{
+        return `${unformatedDate.getFullYear()}-${unformatedDate.getMonth()+1}-${unformatedDate.getDate()}`
+    }
+
+    const Submit = async(e) => {
+        e.preventDefault();
+        // console.log(user[0].id)
+        // console.log(destination[0].name)
+        // console.log(lodging)
+        // console.log(activitiesToSubmit.join(','))
+        // console.log(processDate(dropDate))
+        // console.log(processDate(extractionDate))
+        await dispatch(postABooking(user[0].id,destination[0].name,lodging,activitiesToSubmit.join(''),processDate(dropDate),processDate(extractionDate)))
+    };
 
     return (
       <div>
@@ -54,13 +59,13 @@ export default function Booking(){
           <DatePicker
             className="dropDate"
             selected={dropDate}
-            onSelect={handleDropSelect}
+            onSelect={date=>{setDropDate(date)}}
           />
           <p className="DateSelectLabels">Please Select Your Extraction Date</p>
           <DatePicker
             className="extractionDate"
             selected={extractionDate}
-            onSelect={handleExtractionSelect}
+            onSelect={date=>{setExtractionDate(date)}}
           />
         </div>
         <div className="bookingLodgingSelectDiv">

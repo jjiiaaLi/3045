@@ -10,5 +10,5 @@ class BookingForm(FlaskForm):
     destination=StringField('destination',[DataRequired()])
     lodging=StringField('lodging',[DataRequired()])
     activities=StringField('activities')
-    start_date=DateField('startdate', format='%Y-%m-%d')
-    end_date=DateField('enddate', format='%Y-%m-%d')
+    start_date=DateField('dropdate',format='%Y-%m-%d')
+    end_date=DateField('extractiondate',format='%Y-%m-%d')
