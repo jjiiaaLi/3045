@@ -154,8 +154,10 @@
 
 .activityImage{
     border-radius: 20px;
-    width: 550px;
-    height: 300px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 530px;
+    height: 280px;
     margin-right: 40px;
 }
 

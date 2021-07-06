@@ -1,0 +1,17 @@
+.bookingLodgingSelectDiv{
+    position:relative;
+    display:inline-block;
+}
+
+.selectLodgingBtn{
+
+}
+
+.lodgingOptions{
+    display:none;
+    position:absolute;
+}
+
+.bookingLodgingSelectDiv:hover .lodgingOptions{
+    display:block;
+}
