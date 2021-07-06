@@ -50,7 +50,10 @@
 .userPopularDestDiv{
     display: flex;
     flex-wrap: wrap;
+    width:1600px;
+    height:auto;
     margin-top: 270px;
+    margin-left:200px;
     flex-direction: row;
 }
 
@@ -59,11 +62,11 @@
     height:310px;
     display: flex;
     flex-direction: column;
-    margin:40px
+    margin:40px;
+    object-fit: cover;
 }
 
 .userPopDestName {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 26px;
-
 }

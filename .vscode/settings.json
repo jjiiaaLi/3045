@@ -1,7 +1,7 @@
 {
     "python.pythonPath": "/Users/julietshafto/.pyenv/versions/3.9.4/bin/python",
     "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "python.linting.pycodestyleEnabled": true,
     "python.formatting.provider": "yapf"
 }

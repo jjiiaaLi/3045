@@ -132,9 +132,7 @@ def seed_lodgings():
         attributes=
         "This one is actually inside the station, your own little space with all the ammenities, 3 Free cabin decompressions with booking",
         destination_id=5,
-        image=
-        'https://lh3.googleusercontent.com/proxy/zWk7TshIlhpO9t1kn6QNJjrt20DwEqN_W7G_O9BulZtofj9h1m-E5iCR8TOpPrDmzGENZBPS-Wh_MsGsfOTI0EmGeRzVMeUFlvABcwqg'
-    )
+        image='https://i.ytimg.com/vi/H0CBLw0xOlo/maxresdefault.jpg')
 
     db.session.add(space2)
     db.session.commit()
@@ -144,9 +142,7 @@ def seed_lodgings():
         attributes=
         'For those who have too many credits on account, Take satifaction in taking up more space than necessary, Feel the satisfaction in spending almost 300 times more than the second option and not caring',
         destination_id=5,
-        image=
-        'https://s31606.pcdn.co/wp-content/uploads/2015/10/livingroom2_-e1444084043246.jpg'
-    )
+        image='https://i.ytimg.com/vi/4bLz_4LKMsg/maxresdefault.jpg')
 
     db.session.add(space3)
     db.session.commit()
@@ -169,7 +165,7 @@ def seed_lodgings():
         'Allows you to accend back to the Moon orbiter at will, Extra ascensions available for scheduling via central link, Privacy at it\'s best',
         destination_id=6,
         image=
-        'https://lh3.googleusercontent.com/proxy/uMRMKPOlQUlV5pG8dJDxT9Ub617P8ElENo6zNik-5AOWAH4lsoq14eTNvAcvqHWOcxJERh7t_GYUmOMDPnYMSE4R2faZvMYbwG9k_RnH'
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpbYVcACmC1pKTNHbEZZrOwR4h9dd8SE8SJejKbrDrnrveZ-ILppcQ-UcwMxlLKDB5j3o&usqp=CAU'
     )
 
     db.session.add(moon2)

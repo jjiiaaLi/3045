@@ -6,6 +6,7 @@ import { loadLodgings } from "../../store/lodgings";
 import { loadDestinationActivities } from "../../store/activities";
 import { getDestinationReviews, postAReview, editAReview,deleteReview } from "../../store/reviews";
 import { grabUsers } from "../../store/users";
+import Booking from "../Booking/Booking";
 import "./IndividualDestination.css";
 
 export default function IndividualDestination() {
@@ -15,6 +16,7 @@ export default function IndividualDestination() {
     const [editContent, setEditContent]=useState('')
     const [showEditBox, setShowEditBox]=useState(false)
     const [reviewToEditId,setReviewToEditId]=useState(null)
+    const [showBooking, setShowBooking]=useState(false);
     const dispatch=useDispatch()
     const user=useSelector(state=>Object.values(state.session))
     const destination=useSelector(state=>Object.values(state.destinations))
@@ -78,6 +80,16 @@ export default function IndividualDestination() {
         editAReview(destination[0].id, reviewToEditId, editContent)
       );
       setShowEditBox(false)
+    }
+
+    const BookingClick=(e)=>{
+      e.preventDefault();
+      if(showBooking===true){
+        setShowBooking(false)
+      }
+      else{
+        setShowBooking(true)
+      }
     }
 
     return (
@@ -229,7 +241,7 @@ export default function IndividualDestination() {
                         );
                       }}
                     >
-                      Delete 
+                      Delete
                     </button>
                   </div>
                 )}
@@ -242,7 +254,7 @@ export default function IndividualDestination() {
           <form className="editForm" onSubmit={editReview}>
             <label className="editFormLabel">Edit this review</label>
             <textarea
-              className='editTextarea'
+              className="editTextarea"
               value={editContent}
               onChange={(e) => {
                 setEditContent(e.target.value);
@@ -255,8 +267,11 @@ export default function IndividualDestination() {
           </form>
         )}
 
-        <div className='bookingContainer'>
-              <h1>this is the booking container</h1>
+        <div className="bookingContainer">
+          <div>
+            <button onClick={BookingClick} className='BookingBtn'>Plan</button>
+            {showBooking&&<Booking />}
+          </div>
         </div>
       </div>
     );
