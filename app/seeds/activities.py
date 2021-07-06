@@ -117,9 +117,7 @@ def seed_activities():
         attributes=
         'When the water rose drastically many centuries ago, creator protein generators had to begin constructing protein farms above water.  Some have been found and reconstructed for your touring pleasure.',
         destination_id=4,
-        image=
-        'https://mk0mexiconewsdam2uje.kinstacdn.com/wp-content/uploads/2015/07/tunnel_230769k-600x278.jpg'
-    )
+        image='https://inhabitat.com/files/london-bridge-ed02.jpg')
     db.session.add(houston3)
 
     db.session.commit()
