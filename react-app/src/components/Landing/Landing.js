@@ -17,7 +17,7 @@ export default function Landing(){
             </Link>
           </div>
           <div className="splashDiv"></div>
-          <p className="joinUsText2">Plan > Confirm  > Drop  > Stay  > Extract</p>
+          <p className="joinUsText2">Plan > Confirm > Drop > Stay > Extract</p>
         </div>
       </div>
     );

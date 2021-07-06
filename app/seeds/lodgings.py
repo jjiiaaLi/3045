@@ -110,7 +110,7 @@ def seed_lodgings():
         'Enjoy the entire vacation never having to leave the Rover, Travels around the sky keeping you away from scavangers, Enjoy all the attractions from a safe distance',
         destination_id=4,
         image=
-        'https://lh3.googleusercontent.com/proxy/IwkEAiZi6LiFqQmg-NMptxg1elA68hcdvo9jm49gF5v_C4pYQXe6dXbVh1peeDb2ffnNuKb13SyBEFrvoYFSgIq6vX7EBC6ycQrrcDdduz43cgnrxR7tOi8'
+        'https://simpleflying.com/wp-content/uploads/2021/04/EOSSMALL_0000_Layer7-1000x563.jpeg'
     )
     db.session.add(texas3)
     db.session.commit()

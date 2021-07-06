@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { postABooking } from '../../store/bookings';
 import './Booking.css';
 //learned to use the datepicker package by looking up and learning from the documentation
 import DatePicker from 'react-datepicker'
@@ -11,28 +12,46 @@ export default function Booking(){
     const [dropDate,setDropDate]=useState(new Date("3045-01-08"));
     const [extractionDate, setExtractionDate]=useState(new Date('3045-01-09'));
     const [lodging, setLodging]=useState(null);
+    const [activitiesToSubmit, setActivitiesToSubmit]=useState([]);
+    const user = useSelector((state) => Object.values(state.session));
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
+    const destination = useSelector((state) =>Object.values(state.destinations));
     
     let selectedLodging='Select Lodging'
     if(lodging){
         selectedLodging=lodging
     }
     
-    const handleDropSelect=(date)=>{
-        setDropDate(date);
-    }
-    const handleExtractionSelect=(date)=>{
-        setExtractionDate(date);
-    }
-
-
     
-    const Submit=(e)=>{
+    const updateActivities=(activityName)=>{
+        if(activitiesToSubmit.includes(activityName)){
+            setActivitiesToSubmit(currentArray=>{
+                const newArray=currentArray.filter(activity=>activity!==activityName)
+                return newArray
+            })
+        }
+        else{
+            setActivitiesToSubmit(currentArray=>[...currentArray,activityName])
+        }
+        
+    };
+
+    const processDate=(unformatedDate)=>{
+        return `${unformatedDate.getFullYear()}-${unformatedDate.getMonth()+1}-${unformatedDate.getDate()}`
+    }
+
+    const Submit = async(e) => {
         e.preventDefault();
-        console.log(lodging)
-    }
-    
+        // console.log(user[0].id)
+        // console.log(destination[0].name)
+        // console.log(lodging)
+        // console.log(activitiesToSubmit.join(','))
+        // console.log(processDate(dropDate))
+        // console.log(processDate(extractionDate))
+        await dispatch(postABooking(user[0].id,destination[0].name,lodging,activitiesToSubmit.join(''),processDate(dropDate),processDate(extractionDate)))
+    };
+
     return (
       <div>
         <div className="DateSelectContainer">
@@ -40,20 +59,20 @@ export default function Booking(){
           <DatePicker
             className="dropDate"
             selected={dropDate}
-            onSelect={handleDropSelect}
+            onSelect={date=>{setDropDate(date)}}
           />
           <p className="DateSelectLabels">Please Select Your Extraction Date</p>
           <DatePicker
             className="extractionDate"
             selected={extractionDate}
-            onSelect={handleExtractionSelect}
+            onSelect={date=>{setExtractionDate(date)}}
           />
         </div>
         <div className="bookingLodgingSelectDiv">
           <button value={lodging} className="selectLodgingBtn">
             {selectedLodging}
           </button>
-          
+
           <div className="lodgingOptions">
             {lodgings && (
               <div className="lodgingContent">
@@ -62,7 +81,6 @@ export default function Booking(){
                     value={lodging.name}
                     onClick={(e) => {
                       setLodging(e.target.value);
-                      
                     }}
                     className="lodgingNames"
                   >
@@ -73,8 +91,13 @@ export default function Booking(){
             )}
           </div>
         </div>
-        <div className='bookingActivitiesContainer'>
-
+        <div className="bookingActivitiesContainer">
+          {activities.map((activity) => (
+            <div>
+              <input type="checkbox" id={activity.id} value={activity.name} onChange={e=>updateActivities(e.target.value)} />
+              <label for={activity.id}>{activity.name}</label>
+            </div>
+          ))}
         </div>
         <button onClick={Submit}>Confirm</button>
       </div>

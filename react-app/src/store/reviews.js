@@ -2,8 +2,6 @@
 const GET_DEST_REVIEWS='reviews/GET_DEST_REVIEWS'
 
 
-
-
 const loadDestReviews=(reviews)=>({
     type:GET_DEST_REVIEWS,
     reviews:reviews

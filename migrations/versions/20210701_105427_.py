@@ -60,6 +60,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['destination_id'], ['destinations.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('bookings',
+    sa.Column('id', sa.Integer(),nullable=False),
+    sa.Column('user_id',sa.Integer(),nullable=False),
+    sa.Column('destination',sa.String(), nullable=False),
+    sa.Column('lodging',sa.String(),nullable=False),
+    sa.Column('activities',sa.String()),
+    sa.Column('start_date',sa.DateTime(), nullable=False),
+    sa.Column('end_date',sa.DateTime(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
@@ -70,4 +80,5 @@ def downgrade():
     op.drop_table('users')
     op.drop_table('reviews')
     op.drop_table('destinations')
+    op.drop_table('bookings')
     # ### end Alembic commands ###

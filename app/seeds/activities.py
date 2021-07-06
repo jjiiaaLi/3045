@@ -67,7 +67,7 @@ def seed_activities():
     LV2 = Activity(
         name='Nuclear Test Site',
         attributes=
-        'Places where the creators first tested the technology that resides in our power sources.  There\'s really nothing to see her.  Like how the creators used to climb mountains and there wasn\'t much to see.',
+        'Places where the creators first tested the technology that resides in our power sources.  There\'s really nothing to see here.  Like how the creators used to climb mountains and there wasn\'t much to see.',
         destination_id=3,
         image=
         'https://cdn.cnn.com/cnnnext/dam/assets/190513172549-priscilla-nuclear-test.jpg'
@@ -80,7 +80,7 @@ def seed_activities():
     LV3 = Activity(
         name='Ancient air field',
         attributes=
-        'When the creators first took flight they built these road ways where their flying machines required plenty of space to gain adequate speed due to their weak and primative thrust technology.  It soon became a hub for air travel and is quite a treat to take in all the mysterious things that have been excavated.',
+        'When the creators first took flight they built these road ways because their flying machines required plenty of space to gain adequate speed due to their weak and primative thrust technology.  It soon became a hub for air travel and is quite a treat to take in all the mysterious things that have been excavated.',
         destination_id=3,
         image=
         'https://i.pinimg.com/originals/f7/70/6a/f7706a04044499b765e3b83ba22ea2b9.png'
@@ -102,9 +102,9 @@ def seed_activities():
 
     db.session.commit()
     houston2 = Activity(
-        name='Tunels',
+        name='Tunnels',
         attributes=
-        'These tunnels were found underground a very long time ago and no one knew what they were for.  Latest theory suggest they may have been made to facilitate the travel of wild life the creators favored.  Opposing theory suggest that these were tunnels dug so that creators were able to smuggle contraband which most researchers deem to be ridiculous.',
+        'These tunnels were found underground a very long time ago and no one knew what they were for.  Latest theory suggest they may have been made to facilitate the travel of wild life the creators favored.  Opposing theory suggest that these were tunnels dug so that creators were able to smuggle contraband which most researchers deem to be a ridiculous idea.',
         destination_id=4,
         image=
         'https://mk0mexiconewsdam2uje.kinstacdn.com/wp-content/uploads/2015/07/tunnel_230769k-600x278.jpg'
