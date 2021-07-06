@@ -40,7 +40,7 @@ def seed_destinations():
     city4 = Destination(
         name='Part-9 ZZ_238956',
         summary=
-        'Before the "Great Exsodus" the creators had a large population hub in this area.  Region designated "Part-9" as it was one of the first areas to undergo excavation due to the rapid errosion making it a higher priority site to recover.  There hasn\'t been creator activity reported for over 4 centuries but recent discoveries of detritis indicates that this might be false.',
+        'Before the "Great Exodus" the creators had a large population hub in this area.  Region designated "Part-9" as it was one of the first areas to undergo excavation due to the rapid errosion making it a higher priority site to recover.  There hasn\'t been creator activity reported for over 4 centuries but recent discoveries of detritis indicates that this might be false.',
         images=
         'https://miro.medium.com/max/1024/1*UPM1RDmNyWPis1w8kBdBtw.jpeg,https://i.pinimg.com/originals/c9/48/cc/c948ccdd545e7f047e861e55e04698e7.jpg,https://i.pinimg.com/originals/af/3e/5b/af3e5b4d5c01c7c5a59439b0f5ca2f52.jpg,https://cdnb.artstation.com/p/assets/images/images/000/276/805/large/1.jpg?1414659350,https://i.pinimg.com/originals/40/64/f7/4064f71d140d1827caac5ee4bca7c526.jpg,https://cdna.artstation.com/p/assets/images/images/005/692/890/large/sam-warren-apocalypse-street-2.jpg?1493062412'
     )
