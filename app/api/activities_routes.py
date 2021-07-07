@@ -7,3 +7,9 @@ activities_routes=Blueprint('activities', __name__)
 def getDestinationActivities(id):
     activities=Activity.query.filter_by(destination_id=id).all()
     return {'activities':[activity.to_dict() for activity in activities]}
+
+
+@activities_routes.route('/getAll', methods=["GET"])
+def getAllActivities():
+    activities=Activity.query.all()
+    return {'activities': [activity.to_dict() for activity in activities]}

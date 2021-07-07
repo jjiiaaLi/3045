@@ -17,24 +17,37 @@ const NavBar = () => {
           <img className="logoImg" src={title} alt="logo" />
         </Link>
       </div>
-      {user[0]===null&&<div className="NavObj">
-        <Link className="NavLinks" to="/login" exact={true}>
-          Login
-        </Link>
-      </div>}
-      {user[0]===null&&<div className="NavObj">
-        <Link className="NavLinks" to="/sign-up" exact={true}>
-          Sign Up
-        </Link>
-      </div>}
+      {user[0] === null && (
+        <div className="NavObj">
+          <Link className="NavLinks" to="/login" exact={true}>
+            Login
+          </Link>
+        </div>
+      )}
+      {user[0] === null && (
+        <div className="NavObj">
+          <Link className="NavLinks" to="/sign-up" exact={true}>
+            Sign Up
+          </Link>
+        </div>
+      )}
       <div className="NavObj">
         <Link className="NavLinks" to={`/users/${user[0].id}`} exact={true}>
           Home
         </Link>
       </div>
-      {user[0]&&<div className="NavObj">
-        <LogoutButton  />
-      </div>}
+      {user[0] && (
+        <div className="NavObj">
+          <Link className="NavLinks" to={`/userDrops/${user[0].id}`}>
+            Trips
+          </Link>
+        </div>
+      )}
+      {user[0] && (
+        <div className="NavObj">
+          <LogoutButton />
+        </div>
+      )}
     </nav>
   );
 }

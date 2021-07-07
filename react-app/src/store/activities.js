@@ -8,7 +8,13 @@ const loadActivities=(activities)=>({
     activities:activities
 })
 
-
+export const loadAllActivities=()=>async(dispatch)=>{
+    const res=await fetch('/api/activities/getAll')
+    if(res.ok){
+        const data=await res.json()
+        dispatch(loadActivities(data))
+    }
+}
 
 export const loadDestinationActivities=(id)=>async(dispatch)=>{
     const res=await fetch(`/api/activities/${id}`)

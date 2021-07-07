@@ -6,6 +6,15 @@ const loadDestinationLodgings=(lodgings)=>({
     lodgings:lodgings,
 })
 
+export const loadAllLodgings=(id)=>async(dispatch)=>{
+    const res= await fetch('/api/lodgings/getAll')
+
+    if (res.ok){
+        const data=await res.json()
+        dispatch(loadDestinationLodgings(data))
+    }
+}
+
 
 export const loadLodgings=(id)=>async(dispatch)=>{
     const res=await fetch(`/api/lodgings/${id}`)
