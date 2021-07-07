@@ -9,7 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import Landing from './components/Landing/Landing';
 import IndividualDestination from "./components/IndividualDestination/IndividualDestination";
-import userDrops from "./components/userDrops";
+import UserDrops from "./components/userDrops";
 
 
 function App() {
@@ -47,8 +47,8 @@ function App() {
         <ProtectedRoute path="/destination/:id">
           <IndividualDestination />
         </ProtectedRoute>
-        <ProtectedRoute path='/userDrop/:id'>
-          <userDrops />
+        <ProtectedRoute path='/userDrops/:id'>
+          <UserDrops />
         </ProtectedRoute>
         <Route path="/not-found">
           <h1>404 page not found</h1>

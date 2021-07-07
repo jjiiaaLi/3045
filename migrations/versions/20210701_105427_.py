@@ -66,8 +66,8 @@ def upgrade():
     sa.Column('destination',sa.String(), nullable=False),
     sa.Column('lodging',sa.String(),nullable=False),
     sa.Column('activities',sa.String()),
-    sa.Column('start_date',sa.DateTime(), nullable=False),
-    sa.Column('end_date',sa.DateTime(), nullable=False),
+    sa.Column('start_date',sa.String(), nullable=False),
+    sa.Column('end_date',sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

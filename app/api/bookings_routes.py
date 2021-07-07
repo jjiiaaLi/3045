@@ -10,6 +10,8 @@ def load_bookings():
     bookings=Booking.query.all()
     return {'bookings':[booking.to_dict() for booking in bookings]}
 
+
+
 @booking_routes.route('/post',methods=['POST'])
 def post_booking():
     form=BookingForm()
@@ -28,3 +30,19 @@ def post_booking():
 
         bookings=Booking.query.all()
         return {'bookings':[booking.to_dict() for booking in bookings]}
+
+
+
+
+
+
+
+@booking_routes.route('/delete/<int:booking_id>', methods=["DELETE"])
+def delete_booking(booking_id):
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',id)
+    booking=Booking.query.filter_by(id=booking_id).first()
+    db.session.delete(booking)
+    db.session.commit()
+
+    bookings=Booking.query.all()
+    return {'bookings':[booking.to_dict() for booking in bookings]}

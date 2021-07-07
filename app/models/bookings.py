@@ -9,8 +9,8 @@ class Booking(db.Model):
     destination=db.Column(db.String, nullable=False)
     lodging=db.Column(db.String, nullable=False)
     activities=db.Column(db.String, nullable=True)
-    start_date=db.Column(db.DateTime, nullable=False)
-    end_date=db.Column(db.DateTime, nullable=False)
+    start_date=db.Column(db.String, nullable=False)
+    end_date=db.Column(db.String, nullable=False)
 
     users=db.relationship('User', back_populates='bookings')
 
