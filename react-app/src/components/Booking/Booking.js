@@ -48,7 +48,8 @@ export default function Booking(){
         e.preventDefault();
         await dispatch(postABooking(user[0].id,
           destination[0].name,
-          lodging,activitiesToSubmit.join(','),
+          lodging,
+          activitiesToSubmit.join(','),
           processDate(dropDate),
           processDate(extractionDate)))
 

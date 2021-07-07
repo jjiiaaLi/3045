@@ -2,24 +2,79 @@ import React,{useEffect,useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { loadAllBookings,editBooking,deleteBooking } from '../store/bookings';
-import EditBooking from './EditBooking/EditBooking';
+import {loadAllLodgings} from '../store/lodgings';
+import { loadPopDest } from "../store/destinations";
+import {loadAllActivities} from '../store/activities'
 import './userDrops.css'
 
 
 export default function UserDrops(){
     const {id}=useParams()
     const dispatch=useDispatch()
+
+    const [newLodging,setNewLodging]=useState(null)
+    const [newActivities,setNewActivities]=useState([])
     const [currentEdit, setCurrentEdit]= useState(null)
     const allBookings=useSelector(state=>Object.values(state.bookings))
+    const allLodgings=useSelector(state=>Object.values(state.lodgings))
+    const allDestinations=useSelector(state=>Object.values(state.destinations))
+    const allActivities=useSelector(state=>Object.values(state.activities))
+
     const userBookings=allBookings.filter(booking=>{
         return booking.user_id===Number(id)
     })
     
     useEffect(()=>{
-        dispatch(loadAllBookings())
+        dispatch(loadAllBookings());
+        dispatch(loadAllLodgings());
+        dispatch(loadPopDest());
+        dispatch(loadAllActivities());
     },[dispatch])
-
     
+    const getSpecificLodgings=(dest)=>{
+        const destinationId=allDestinations.filter(destination=>{
+            if(destination.name==dest){
+                return destination.id
+            }
+        })
+       
+        const destinationLodgings=allLodgings.filter(lodging=>{
+            if(lodging.destination_id===destinationId[0]?.id){
+                return lodging
+            }
+        })
+        return destinationLodgings
+    }
+    
+    const getSpecificActivities=(dest)=>{
+        const destinationId = allDestinations.filter((destination) => {
+          if (destination.name == dest) {
+            return destination.id;
+          }
+        });
+
+        const destinationActivities=allActivities.filter(activity=>{
+            if(activity.destination_id===destinationId[0]?.id){
+                return activity
+            }
+        })
+        return destinationActivities
+    }
+
+    const updateNewActivities=(activityname)=>{
+        if(newActivities.includes(activityname)){
+            setNewActivities(currentArray=>{
+                const newArray=currentArray.filter(activity=>{
+                    if(activity!==activityname){
+                        return activity
+                    }
+                })
+            })
+        }
+        else{
+            setNewActivities(currentArray=>[...currentArray,activityname])
+        }
+    }
 
     return (
       <div className="BookingsContainer">
@@ -51,7 +106,7 @@ export default function UserDrops(){
                 value={booking.id}
                 onClick={(e) => {
                   dispatch(editBooking(Number(e.target.value)));
-                  setCurrentEdit(e.target.value)
+                  setCurrentEdit(e.target.value);
                 }}
               >
                 Edit
@@ -65,8 +120,44 @@ export default function UserDrops(){
                 Delete
               </button>
             </div>
-            {}
-            <EditBooking/>
+            {Number(currentEdit) === booking.id && (
+              <div className="eachBookingEditDiv">
+                <div>
+                  <p className="editDivDestination">{booking.destination}</p>
+                  <div className="editDivLodging">
+                    <p>Lodgings</p>
+                    {getSpecificLodgings(booking.destination).map((lodging) => (
+                      <div className="editLodgingCheckboxEach">
+                        <input
+                          type="checkbox"
+                          onChange={(e) => {
+                            setNewLodging(e.target.value);
+                          }}
+                          name={lodging.name}
+                          value={lodging.name}
+                        />
+                        <label for={lodging.name}>{lodging.name}</label>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="editDivActivities">
+                      <p>Activities</p>
+                      {getSpecificActivities(booking.destination).map((activity)=>(
+                          <div className='editActivityCheckboxEach'>
+                                <input
+                                    type='checkbox'
+                                    onChange={e=>{updateNewActivities(e.target.value)}}
+                                    value={activity.name}
+                                    name={activity.name}
+                                />
+                                <label for={activity.name}>{activity.name}</label>
+                          </div>
+                      ))}
+                  </div>
+                  <button>Confirm Edit</button>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

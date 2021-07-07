@@ -9,3 +9,10 @@ def getDestinationLodgings(id):
 
     return {"lodgings":[lodging.to_dict() for lodging in lodgings]}
 
+
+
+@lodging_routes.route('/getAll', methods=["GET"])
+def get_all_lodgings():
+    all_lodgings=Lodging.query.all()
+
+    return{'lodgings':[lodging.to_dict() for lodging in all_lodgings]}
