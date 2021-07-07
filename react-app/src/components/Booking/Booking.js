@@ -51,6 +51,8 @@ export default function Booking(){
           lodging,activitiesToSubmit.join(''),
           processDate(dropDate),
           processDate(extractionDate)))
+
+        
     };
 
     return (

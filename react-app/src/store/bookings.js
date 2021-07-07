@@ -17,6 +17,20 @@ export const loadAllBookings=()=>async(dispatch)=>{
     }
 }
 
+export const editBooking=(id)=>async(dispatch)=>{
+    
+}
+
+export const deleteBooking=(id)=>async(dispatch)=>{
+    const res=await fetch(`/api/bookings/delete/${id}`,{
+        method:'DELETE',
+        headers: { "Content-Type": "application/json" },
+    })
+    if(res.ok){
+        const data=await res.json()
+        dispatch(loadBookings(data))
+    }
+}
 
 export const postABooking=(user_id,destination,lodging,activities,start_date,end_date)=>async(dispatch)=>{
     console.log(
