@@ -21,6 +21,7 @@ export default function UserDrops(){
     const allLodgings=useSelector(state=>Object.values(state.lodgings))
     const allDestinations=useSelector(state=>Object.values(state.destinations))
     const allActivities=useSelector(state=>Object.values(state.activities))
+    const [newDestination,setNewDestination]=useState(null)
 
     const userBookings=allBookings.filter(booking=>{
         return booking.user_id===Number(id)
@@ -76,8 +77,27 @@ export default function UserDrops(){
         }
     }
 
-    console.log(newStartDate)
-    console.log(newEndDate)
+    const processDate = (unformatedDate) => {
+      return `${unformatedDate.getFullYear()}-${
+        unformatedDate.getMonth() + 1
+      }-${unformatedDate.getDate()}`;
+    };
+
+    const submitEdit=async(e)=>{
+      e.preventDefault()
+      const bookingId=(Number(currentEdit))
+      const user_id=(Number(id))
+      const destination=(newDestination)
+      const lodging=(newLodging)
+      const activities=(newActivities.join(','))
+      const start_date=(processDate(newStartDate));
+      const end_date=(processDate(newEndDate));
+
+      await dispatch(editBooking(bookingId,user_id,destination,lodging,activities,start_date,end_date))
+      setCurrentEdit(null)
+    }
+    
+
     return (
       <div className="BookingsContainer">
         {userBookings.map((booking) => (
@@ -105,10 +125,11 @@ export default function UserDrops(){
                 </ul>
               </div>
               <button
-                value={booking.id}
+                value={booking}
                 onClick={(e) => {
-                  dispatch(editBooking(Number(e.target.value)));
-                  setCurrentEdit(e.target.value);
+                  setCurrentEdit(booking.id);
+                  setNewDestination(booking.destination);
+                  setNewLodging(booking.lodging)
                 }}
               >
                 Edit
@@ -182,7 +203,7 @@ export default function UserDrops(){
                       )
                     )}
                   </div>
-                  <button>Confirm Edit</button>
+                  <button onClick={submitEdit}>Confirm Edit</button>
                 </div>
               </div>
             )}
