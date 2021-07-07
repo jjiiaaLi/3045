@@ -4,14 +4,16 @@ import { useParams } from 'react-router-dom';
 import { loadAllBookings,editBooking,deleteBooking } from '../store/bookings';
 import {loadAllLodgings} from '../store/lodgings';
 import { loadPopDest } from "../store/destinations";
-import {loadAllActivities} from '../store/activities'
+import {loadAllActivities} from '../store/activities';
+import DatePicker from "react-datepicker";
 import './userDrops.css'
 
 
 export default function UserDrops(){
     const {id}=useParams()
     const dispatch=useDispatch()
-
+    const [newStartDate, setNewStartDate] = useState(new Date("3045-01-09"));
+    const [newEndDate, setNewEndDate] = useState(new Date("3045-01-10"));
     const [newLodging,setNewLodging]=useState(null)
     const [newActivities,setNewActivities]=useState([])
     const [currentEdit, setCurrentEdit]= useState(null)
@@ -62,13 +64,11 @@ export default function UserDrops(){
     }
 
     const updateNewActivities=(activityname)=>{
+        
         if(newActivities.includes(activityname)){
             setNewActivities(currentArray=>{
-                const newArray=currentArray.filter(activity=>{
-                    if(activity!==activityname){
-                        return activity
-                    }
-                })
+                const newArray=currentArray.filter(activity=>activity!==activityname)
+                return newArray
             })
         }
         else{
@@ -76,6 +76,8 @@ export default function UserDrops(){
         }
     }
 
+    console.log(newStartDate)
+    console.log(newEndDate)
     return (
       <div className="BookingsContainer">
         {userBookings.map((booking) => (
@@ -124,16 +126,38 @@ export default function UserDrops(){
               <div className="eachBookingEditDiv">
                 <div>
                   <p className="editDivDestination">{booking.destination}</p>
+                  <div className="editStartDateDiv">
+                    <p>Select New Drop Date</p>
+                    <DatePicker
+                      className="newDropDate"
+                      selected={newStartDate}
+                      onSelect={(date) => {
+                        setNewStartDate(date);
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <p className="editEndDateDiv">
+                      <p>Select New Extraction Date</p>
+                      <DatePicker
+                        className="newExtractionDate"
+                        selected={newEndDate}
+                        onSelect={(date) => {
+                          setNewEndDate(date);
+                        }}
+                      />
+                    </p>
+                  </div>
                   <div className="editDivLodging">
                     <p>Lodgings</p>
                     {getSpecificLodgings(booking.destination).map((lodging) => (
                       <div className="editLodgingCheckboxEach">
                         <input
-                          type="checkbox"
+                          type="radio"
                           onChange={(e) => {
                             setNewLodging(e.target.value);
                           }}
-                          name={lodging.name}
+                          name="lodgingRadio"
                           value={lodging.name}
                         />
                         <label for={lodging.name}>{lodging.name}</label>
@@ -141,18 +165,22 @@ export default function UserDrops(){
                     ))}
                   </div>
                   <div className="editDivActivities">
-                      <p>Activities</p>
-                      {getSpecificActivities(booking.destination).map((activity)=>(
-                          <div className='editActivityCheckboxEach'>
-                                <input
-                                    type='checkbox'
-                                    onChange={e=>{updateNewActivities(e.target.value)}}
-                                    value={activity.name}
-                                    name={activity.name}
-                                />
-                                <label for={activity.name}>{activity.name}</label>
-                          </div>
-                      ))}
+                    <p>Activities</p>
+                    {getSpecificActivities(booking.destination).map(
+                      (activity) => (
+                        <div className="editActivityCheckboxEach">
+                          <input
+                            type="checkbox"
+                            onChange={(e) => {
+                              updateNewActivities(e.target.value);
+                            }}
+                            value={activity.name}
+                            name={activity.name}
+                          />
+                          <label for={activity.name}>{activity.name}</label>
+                        </div>
+                      )
+                    )}
                   </div>
                   <button>Confirm Edit</button>
                 </div>
