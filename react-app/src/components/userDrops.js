@@ -158,7 +158,7 @@ export default function UserDrops(){
                     />
                   </div>
                   <div>
-                    <p className="editEndDateDiv">
+                    <div className="editEndDateDiv">
                       <p>Select New Extraction Date</p>
                       <DatePicker
                         className="newExtractionDate"
@@ -167,7 +167,7 @@ export default function UserDrops(){
                           setNewEndDate(date);
                         }}
                       />
-                    </p>
+                    </div>
                   </div>
                   <div className="editDivLodging">
                     <p>Lodgings</p>
@@ -181,7 +181,7 @@ export default function UserDrops(){
                           name="lodgingRadio"
                           value={lodging.name}
                         />
-                        <label for={lodging.name}>{lodging.name}</label>
+                        <label >{lodging.name}</label>
                       </div>
                     ))}
                   </div>
@@ -198,7 +198,7 @@ export default function UserDrops(){
                             value={activity.name}
                             name={activity.name}
                           />
-                          <label for={activity.name}>{activity.name}</label>
+                          <label >{activity.name}</label>
                         </div>
                       )
                     )}
