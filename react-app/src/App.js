@@ -9,8 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import Landing from './components/Landing/Landing';
 import IndividualDestination from "./components/IndividualDestination/IndividualDestination";
-
-
+import userDrops from "./components/userDrops";
 
 
 function App() {
@@ -42,12 +41,21 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/" exact={true} >
+        <Route path="/" exact={true}>
           <Landing />
         </Route>
-        <ProtectedRoute path='/destination/:id'>
+        <ProtectedRoute path="/destination/:id">
           <IndividualDestination />
         </ProtectedRoute>
+        <ProtectedRoute path='/userDrop/:id'>
+          <userDrops />
+        </ProtectedRoute>
+        <Route path="/not-found">
+          <h1>404 page not found</h1>
+        </Route>
+        <Route>
+          <h1>404 page not found</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

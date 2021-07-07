@@ -5,6 +5,11 @@ from ..forms.booking_form import BookingForm
 booking_routes = Blueprint('bookings', __name__)
 
 
+@booking_routes.route('/load', methods=["GET"])
+def load_bookings():
+    bookings=Booking.query.all()
+    return {'bookings':[booking.to_dict() for booking in bookings]}
+
 @booking_routes.route('/post',methods=['POST'])
 def post_booking():
     form=BookingForm()

@@ -8,6 +8,16 @@ const loadBookings=(bookings)=>({
 })
 
 
+export const loadAllBookings=()=>async(dispatch)=>{
+    const res=await fetch('/api/bookings/load')
+
+    if(res.ok){
+        const data=await res.json()
+        dispatch(loadBookings(data))
+    }
+}
+
+
 export const postABooking=(user_id,destination,lodging,activities,start_date,end_date)=>async(dispatch)=>{
     console.log(
       user_id,

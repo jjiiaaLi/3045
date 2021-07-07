@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postABooking } from '../../store/bookings';
+import { postABooking,loadAllBookings } from '../../store/bookings';
 import './Booking.css';
 //learned to use the datepicker package by looking up and learning from the documentation
 import DatePicker from 'react-datepicker'
@@ -17,12 +17,15 @@ export default function Booking(){
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
     const destination = useSelector((state) =>Object.values(state.destinations));
+
+    useEffect(()=>{
+      dispatch(loadAllBookings())
+    },[dispatch])
     
     let selectedLodging='Select Lodging'
     if(lodging){
         selectedLodging=lodging
     }
-    
     
     const updateActivities=(activityName)=>{
         if(activitiesToSubmit.includes(activityName)){
@@ -43,13 +46,11 @@ export default function Booking(){
 
     const Submit = async(e) => {
         e.preventDefault();
-        // console.log(user[0].id)
-        // console.log(destination[0].name)
-        // console.log(lodging)
-        // console.log(activitiesToSubmit.join(','))
-        // console.log(processDate(dropDate))
-        // console.log(processDate(extractionDate))
-        await dispatch(postABooking(user[0].id,destination[0].name,lodging,activitiesToSubmit.join(''),processDate(dropDate),processDate(extractionDate)))
+        await dispatch(postABooking(user[0].id,
+          destination[0].name,
+          lodging,activitiesToSubmit.join(''),
+          processDate(dropDate),
+          processDate(extractionDate)))
     };
 
     return (
@@ -99,7 +100,7 @@ export default function Booking(){
             </div>
           ))}
         </div>
-        <button onClick={Submit}>Confirm</button>
+        <button onClick={Submit}>Schedule Drop</button>
       </div>
     );
 }

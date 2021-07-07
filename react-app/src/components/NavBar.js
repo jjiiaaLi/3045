@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import title from '../images/title.png';
@@ -6,6 +7,8 @@ import './NavBar.css'
 
 const NavBar = () => {
   
+  const user=useSelector(state=>Object.values(state.session))
+
 
   return (
     <nav className="NavDiv">
@@ -14,24 +17,24 @@ const NavBar = () => {
           <img className="logoImg" src={title} alt="logo" />
         </Link>
       </div>
-      <div className="NavObj">
+      {user[0]===null&&<div className="NavObj">
         <Link className="NavLinks" to="/login" exact={true}>
           Login
         </Link>
-      </div>
-      <div className="NavObj">
+      </div>}
+      {user[0]===null&&<div className="NavObj">
         <Link className="NavLinks" to="/sign-up" exact={true}>
           Sign Up
         </Link>
-      </div>
+      </div>}
       <div className="NavObj">
-        <Link className="NavLinks" to="/users" exact={true}>
-          Users
+        <Link className="NavLinks" to={`/users/${user[0].id}`} exact={true}>
+          Home
         </Link>
       </div>
-      <div className="NavObj">
+      {user[0]&&<div className="NavObj">
         <LogoutButton  />
-      </div>
+      </div>}
     </nav>
   );
 }
