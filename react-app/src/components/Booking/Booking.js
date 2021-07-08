@@ -13,6 +13,7 @@ export default function Booking(){
     const [extractionDate, setExtractionDate]=useState(new Date('3045-01-09'));
     const [lodging, setLodging]=useState(null);
     const [activitiesToSubmit, setActivitiesToSubmit]=useState([]);
+    const [showSelf,setShowSelf]=useState(true);
     const user = useSelector((state) => Object.values(state.session));
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
@@ -57,20 +58,31 @@ export default function Booking(){
     };
 
     return (
-      <div>
-        <div className="DateSelectContainer">
-          <p className="DateSelectLabels">Please Select Your Drop Date</p>
-          <DatePicker
-            className="dropDate"
-            selected={dropDate}
-            onSelect={date=>{setDropDate(date)}}
-          />
-          <p className="DateSelectLabels">Please Select Your Extraction Date</p>
-          <DatePicker
-            className="extractionDate"
-            selected={extractionDate}
-            onSelect={date=>{setExtractionDate(date)}}
-          />
+      <div className="bookingFormContainer">
+        <div className="selectDateContainer">
+          <div className="DateSelectContainer">
+            <div className="bookingDateLabelContainer">
+              <div className="DateSelectLabels">Drop Date</div>
+              <div className="DateSelectLabels">Extraction Date</div>
+            </div>
+
+            <div className="bookingDatePickerContainer">
+              <DatePicker
+                className="bookingDateWindows"
+                selected={dropDate}
+                onSelect={(date) => {
+                  setDropDate(date);
+                }}
+              />
+              <DatePicker
+                className="bookingDateWindows"
+                selected={extractionDate}
+                onSelect={(date) => {
+                  setExtractionDate(date);
+                }}
+              />
+            </div>
+          </div>
         </div>
         <div className="bookingLodgingSelectDiv">
           <button value={lodging} className="selectLodgingBtn">
@@ -96,15 +108,21 @@ export default function Booking(){
           </div>
         </div>
         <div className="bookingActivitiesContainer">
+          <div className='bookingActivitiesLabel'>Activities</div>
           {activities.map((activity) => (
             <div>
-              <input type="checkbox" id={activity.id} value={activity.name} onChange={e=>updateActivities(e.target.value)} />
+              <input
+                type="checkbox"
+                id={activity.id}
+                value={activity.name}
+                onChange={(e) => updateActivities(e.target.value)}
+              />
               <label for={activity.id}>{activity.name}</label>
             </div>
           ))}
         </div>
-        <button onClick={Submit}>Schedule Drop</button>
-        
+        <button className='scheduleBtn' onClick={Submit}>Schedule Drop</button>
+
       </div>
     );
 }

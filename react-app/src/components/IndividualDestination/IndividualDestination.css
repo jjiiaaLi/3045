@@ -356,9 +356,28 @@
 .bookingContainer{
     width:250px;
     height:400px;
-    border-style:dotted;
+    border-style:solid;
+    border-width: 1px;
+    border-color: silver;
     position:fixed;
     margin-left: 1290px;
     margin-top:100px;
     border-radius: 30px;
+    background-color: rgb(238, 238, 238);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.BookingBtn{
+    width:95px;
+    height:40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    background-color: rgb(2, 113, 160);
+    color:rgb(233, 233, 233);
+    border-style: hidden;
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-left: 78px;
+    cursor:pointer;
 }
