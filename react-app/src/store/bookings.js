@@ -48,14 +48,7 @@ export const deleteBooking=(id)=>async(dispatch)=>{
 }
 
 export const postABooking=(user_id,destination,lodging,activities,start_date,end_date)=>async(dispatch)=>{
-    console.log(
-      user_id,
-      destination,
-      lodging,
-      activities,
-      start_date,
-      end_date
-    );
+    
     const res = await fetch("/api/bookings/post", {
       method: "POST",
       headers: {
