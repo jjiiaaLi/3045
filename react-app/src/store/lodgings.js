@@ -27,8 +27,6 @@ export const loadLodgings=(id)=>async(dispatch)=>{
 }
 
 
-
-
 export default function lodgingReducer(state={},action){
     let newState={}
     switch(action.type){
