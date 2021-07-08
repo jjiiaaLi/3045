@@ -21,7 +21,8 @@
 
 .NavLinks {
     text-decoration: none;
-    color:rgb(67, 66, 66)
+    color:rgb(67, 66, 66);
+    text-shadow: 3px 3px 2.7px gray;
 }
 
 .logoutBtn {

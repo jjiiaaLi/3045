@@ -1,0 +1,38 @@
+.signUpContainer{
+    background-image: url(https://i.pinimg.com/originals/7c/8d/d6/7c8dd6c22a69081ae6cc274628ed6e2f.jpg);
+    height:800px;
+    width:100;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpForm{
+    border-style:hidden;
+    border-radius: 20px;
+    background-color: white;
+    width:320px;
+    height:300px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    opacity: .80;
+}
+
+.signUpBtn{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: rgb(64, 83, 224);
+    color:white;
+    cursor:pointer;
+}
+
+.signUpInput {
+    border:0;
+    border-bottom: 1px solid black;
+    margin-left:7px;
+}

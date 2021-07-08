@@ -150,7 +150,7 @@ def seed_activities():
         'These beings have been observing and influencing our creators for eons.  They have set up perminent observation stations around the planet in orbit since now the creators are no longer capable of detecting them with their current technology.  Come take a fly by tour of their forward research station.',
         destination_id=5,
         image=
-        'https://thumbs-prod.si-cdn.com/qyd937Dyy7Z9YxiIDAaSwV91itU=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/cc/bb/ccbb5e39-e6f0-4d6e-9b64-c1ae44b58f5c/istock-611295678.jpg'
+        'https://static.wikia.nocookie.net/concord/images/9/9c/Orbital_.jpg/revision/latest?cb=20200815153222'
     )
 
     db.session.add(station3)

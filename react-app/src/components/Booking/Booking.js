@@ -122,7 +122,6 @@ export default function Booking(){
           ))}
         </div>
         <button className='scheduleBtn' onClick={Submit}>Schedule Drop</button>
-
       </div>
     );
 }
