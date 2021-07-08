@@ -32,13 +32,13 @@ const NavBar = () => {
         </div>
       )}
       <div className="NavObj">
-        <Link className="NavLinks" to={`/users/${user[0].id}`} exact={true}>
+        <Link className="NavLinks" to={`/users/${user[0]?.id}`} exact={true}>
           Home
         </Link>
       </div>
       {user[0] && (
         <div className="NavObj">
-          <Link className="NavLinks" to={`/userDrops/${user[0].id}`}>
+          <Link className="NavLinks" to={`/userDrops/${user[0]?.id}`}>
             Trips
           </Link>
         </div>

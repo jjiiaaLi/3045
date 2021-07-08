@@ -126,6 +126,7 @@ export default function UserDrops(){
               </div>
               <button
                 value={booking}
+                className='eachBookingEditBtn'
                 onClick={(e) => {
                   setCurrentEdit(booking.id);
                   setNewDestination(booking.destination);
@@ -135,6 +136,7 @@ export default function UserDrops(){
                 Edit
               </button>
               <button
+                className='eachBookingDeleteBtn'
                 value={booking.id}
                 onClick={(e) => {
                   dispatch(deleteBooking(Number(e.target.value)));
@@ -145,7 +147,7 @@ export default function UserDrops(){
             </div>
             {Number(currentEdit) === booking.id && (
               <div className="eachBookingEditDiv">
-                <div>
+               
                   <p className="editDivDestination">{booking.destination}</p>
                   <div className="editStartDateDiv">
                     <p>Select New Drop Date</p>
@@ -203,8 +205,8 @@ export default function UserDrops(){
                       )
                     )}
                   </div>
-                  <button onClick={submitEdit}>Confirm Edit</button>
-                </div>
+                  <button className='ConfirmEditBtn' onClick={submitEdit}>Confirm Edit</button>
+                
               </div>
             )}
           </div>
