@@ -10,6 +10,7 @@ import { authenticate } from "./store/session";
 import Landing from './components/Landing/Landing';
 import IndividualDestination from "./components/IndividualDestination/IndividualDestination";
 import UserDrops from "./components/userDrops";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <h1>404 page not found</h1>
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

@@ -1,0 +1,14 @@
+.footerlinks{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+.linkDiv{
+    display: flex;
+    justify-content: space-around;
+    border-style: ;
+}
+
+.footerDiv{
+    padding-top: 125px;
+}

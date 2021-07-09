@@ -38,7 +38,6 @@ export default function Booking(){
         else{
             setActivitiesToSubmit(currentArray=>[...currentArray,activityName])
         }
-        
     };
 
     const processDate=(unformatedDate)=>{
@@ -53,8 +52,7 @@ export default function Booking(){
           activitiesToSubmit.join(','),
           processDate(dropDate),
           processDate(extractionDate)))
-
-        
+          alert('Success! Go to Trips to view your drops!')
     };
 
     return (
