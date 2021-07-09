@@ -12,7 +12,12 @@ export default function Footer(){
           ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
         </p>
         <div className="linkDiv">
-          <a className='footerlinks' href=''>About</a>
+          <a
+            className="footerlinks"
+            href="https://github.com/jjiiaaLi/3045/blob/main/README.md"
+          >
+            About
+          </a>
           <a className="footerlinks" href="https://github.com/jjiiaaLi/3045">
             GitHub
           </a>
