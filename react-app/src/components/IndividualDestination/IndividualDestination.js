@@ -8,6 +8,7 @@ import { getDestinationReviews, postAReview, editAReview,deleteReview } from "..
 import { grabUsers } from "../../store/users";
 import Booking from "../Booking/Booking";
 import "./IndividualDestination.css";
+import defaultrobo from '../../images/defaultrobo.png';
 
 export default function IndividualDestination() {
     const {id}=useParams()
@@ -32,7 +33,15 @@ export default function IndividualDestination() {
         dispatch(getDestinationReviews(Number(id)))
         dispatch(grabUsers())
     },[dispatch])
-
+    
+    const allowNullUserImg=()=>{
+      if(!user[0].image){
+        return "https://icon-library.com/images/ai-icon/ai-icon-7.jpg";
+      }
+      else{
+        return user[0].image;
+      }
+    }
     
     let imageArr
     if(destination.length){
@@ -43,7 +52,6 @@ export default function IndividualDestination() {
     if(lodgingAttributes.length){
       lodgingAttributeList=lodgingAttributes.split(',')
     }
-    
     
 
     const getAuthorName=(user_id)=>{
@@ -61,7 +69,13 @@ export default function IndividualDestination() {
           userImg= user.image
         }
       })
-      return userImg
+      if(!userImg){
+        
+        return "https://icon-library.com/images/ai-icon/ai-icon-7.jpg"
+      }
+      else{
+        return userImg
+      }
     }
 
     const submitReview = async (e) => {
@@ -181,7 +195,7 @@ export default function IndividualDestination() {
         </p>
         <p className="reviewLabel">Reviews</p>
         <div className="reviewFormContainer">
-          <img className="reviewFormUserImg" src={user[0].image} />
+          {user&&<img className="reviewFormUserImg" src={allowNullUserImg()} />}
           <form className="reviewForm" onSubmit={submitReview}>
             <div>
               <textarea
@@ -206,7 +220,7 @@ export default function IndividualDestination() {
               <div className="eachReviewContainer">
                 <div className="eachReviewTopDiv">
                   <img
-                    alt="reviewAuthor"
+                    alt='reviewAuthor'
                     className="reviewAuthorImg"
                     src={getAuthorImg(review.user_id)}
                   />
