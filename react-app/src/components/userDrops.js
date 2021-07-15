@@ -98,8 +98,7 @@ export default function UserDrops(){
     }
     
 
-    console.log(newStartDate);
-    console.log(newEndDate);
+    console.log(newActivities);
 
     return (
       <div className="BookingsContainer">
@@ -136,6 +135,7 @@ export default function UserDrops(){
                   setNewLodging(booking.lodging);
                   setNewStartDate(new Date(booking.start_date));
                   setNewEndDate(new Date(booking.end_date));
+                  setNewActivities(booking.activities.split(','));
                 }}
               >
                 Edit
@@ -185,6 +185,7 @@ export default function UserDrops(){
                           onChange={(e) => {
                             setNewLodging(e.target.value);
                           }}
+                          checked={lodging.name===newLodging}
                           name="lodgingRadio"
                           value={lodging.name}
                         />
@@ -202,6 +203,7 @@ export default function UserDrops(){
                             onChange={(e) => {
                               updateNewActivities(e.target.value);
                             }}
+                            checked={newActivities.includes(activity.name)}
                             value={activity.name}
                             name={activity.name}
                           />

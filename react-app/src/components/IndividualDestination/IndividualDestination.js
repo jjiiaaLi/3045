@@ -8,7 +8,7 @@ import { getDestinationReviews, postAReview, editAReview,deleteReview } from "..
 import { grabUsers } from "../../store/users";
 import Booking from "../Booking/Booking";
 import "./IndividualDestination.css";
-import defaultrobo from '../../images/defaultrobo.png';
+
 
 export default function IndividualDestination() {
     const {id}=useParams()
