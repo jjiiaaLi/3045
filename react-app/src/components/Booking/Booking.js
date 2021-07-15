@@ -54,6 +54,8 @@ export default function Booking(){
           processDate(extractionDate)))
           alert('Success! Go to Trips to view your drops!')
     };
+    
+    
 
     return (
       <div className="bookingFormContainer">

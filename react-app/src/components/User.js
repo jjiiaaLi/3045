@@ -26,7 +26,7 @@ function User() {
         <p className="splashDirectionText">
           Scroll down for popular destinations
         </p>
-        <button className="suggestionBtn">Search Destinations</button>
+        {/* <button className="suggestionBtn">Search Destinations</button> */}
       </div>
       <div className="userPopularDestDiv">
         {popularDestinations.map((destination) => (

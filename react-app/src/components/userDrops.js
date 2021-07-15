@@ -98,6 +98,9 @@ export default function UserDrops(){
     }
     
 
+    console.log(newStartDate);
+    console.log(newEndDate);
+
     return (
       <div className="BookingsContainer">
         {userBookings.map((booking) => (
@@ -130,7 +133,9 @@ export default function UserDrops(){
                 onClick={(e) => {
                   setCurrentEdit(booking.id);
                   setNewDestination(booking.destination);
-                  setNewLodging(booking.lodging)
+                  setNewLodging(booking.lodging);
+                  setNewStartDate(new Date(booking.start_date));
+                  setNewEndDate(new Date(booking.end_date));
                 }}
               >
                 Edit
