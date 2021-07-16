@@ -32,7 +32,7 @@ export default function IndividualDestination() {
         dispatch(loadDestinationActivities(Number(id)))
         dispatch(getDestinationReviews(Number(id)))
         dispatch(grabUsers())
-    },[dispatch])
+    },[dispatch,id])
     
     const allowNullUserImg=()=>{
       if(!user[0].image){
@@ -113,12 +113,12 @@ export default function IndividualDestination() {
         )}
         {destination.length && (
           <div className="individualDestPhotosContainer">
-            <img className="individualDestFirstPic" src={imageArr[0]} />
+            <img alt='first' className="individualDestFirstPic" src={imageArr[0]} />
             <div className="individualDestOtherPicsContainer">
-              <img className="individualDestOtherPics" src={imageArr[1]} />
-              <img className="individualDestOtherPics" src={imageArr[2]} />
-              <img className="individualDestOtherPics" src={imageArr[3]} />
-              <img className="individualDestOtherPics" src={imageArr[4]} />
+              <img alt='second' className="individualDestOtherPics" src={imageArr[1]} />
+              <img alt='third' className="individualDestOtherPics" src={imageArr[2]} />
+              <img alt='fourth' className="individualDestOtherPics" src={imageArr[3]} />
+              <img alt='final' className="individualDestOtherPics" src={imageArr[4]} />
             </div>
           </div>
         )}
@@ -146,7 +146,7 @@ export default function IndividualDestination() {
             {lodgings.length &&
               lodgings.map((lodging) => (
                 <div className="lodgingThumbEach">
-                  <img className="eachLodgingImg" src={lodging.image} />
+                  <img alt='lodging' className="eachLodgingImg" src={lodging.image} />
                   <button
                     value={lodging.attributes}
                     className="lodgingSelectBtn"
@@ -182,7 +182,7 @@ export default function IndividualDestination() {
           {activities &&
             activities.map((activity) => (
               <div className="individualActivityContainer">
-                <img className="activityImage" src={activity.image} />
+                <img alt ='activity' className="activityImage" src={activity.image} />
                 <div>
                   <p className="activityName">{activity.name}</p>
                   <p className="activitySummary">{activity.attributes}</p>
@@ -195,7 +195,7 @@ export default function IndividualDestination() {
         </p>
         <p className="reviewLabel">Reviews</p>
         <div className="reviewFormContainer">
-          {user&&<img className="reviewFormUserImg" src={allowNullUserImg()} />}
+          {user&&<img alt='user' className="reviewFormUserImg" src={allowNullUserImg()} />}
           <form className="reviewForm" onSubmit={submitReview}>
             <div>
               <textarea

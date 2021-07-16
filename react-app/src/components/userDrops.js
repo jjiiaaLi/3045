@@ -36,7 +36,7 @@ export default function UserDrops(){
     
     const getSpecificLodgings=(dest)=>{
         const destinationId=allDestinations.filter(destination=>{
-            if(destination.name==dest){
+            if(destination.name===dest){
                 return destination.id
             }
         })
@@ -51,7 +51,7 @@ export default function UserDrops(){
     
     const getSpecificActivities=(dest)=>{
         const destinationId = allDestinations.filter((destination) => {
-          if (destination.name == dest) {
+          if (destination.name === dest) {
             return destination.id;
           }
         });
@@ -106,7 +106,7 @@ export default function UserDrops(){
     return (
       <div className="BookingsContainer">
         {userBookings.map((booking) => (
-          <div value={booking.id}>
+          <div key={booking.user_id} value={booking.id}>
             <div value={booking.id} className="eachBookingContainer">
               <p>{booking.destination}</p>
               <div>
@@ -125,7 +125,7 @@ export default function UserDrops(){
                 <p>Planned Activities</p>
                 <ul>
                   {booking.activities.split(",").map((activity) => (
-                    <li>{activity}</li>
+                    <li key={activity}>{activity}</li>
                   ))}
                 </ul>
               </div>

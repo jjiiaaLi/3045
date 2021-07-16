@@ -14,7 +14,7 @@ import Footer from "./components/Footer/Footer";
 
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
+  
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
 
@@ -23,7 +23,7 @@ function App() {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
