@@ -85,6 +85,11 @@ export default function UserDrops(){
 
     const submitEdit=async(e)=>{
       e.preventDefault()
+      if(newStartDate.getDate()>newEndDate.getDate()){
+        alert('Drop Date cannot be later than the Extraction Date!')
+        return
+      }
+
       const bookingId=(Number(currentEdit))
       const user_id=(Number(id))
       const destination=(newDestination)
@@ -97,8 +102,6 @@ export default function UserDrops(){
       setCurrentEdit(null)
     }
     
-
-    console.log(newActivities);
 
     return (
       <div className="BookingsContainer">
