@@ -13,7 +13,6 @@ export default function Booking(){
     const [extractionDate, setExtractionDate]=useState(new Date('3045-01-09'));
     const [lodging, setLodging]=useState(null);
     const [activitiesToSubmit, setActivitiesToSubmit]=useState([]);
-    const [showSelf,setShowSelf]=useState(true);
     const user = useSelector((state) => Object.values(state.session));
     const activities = useSelector((state) => Object.values(state.activities));
     const lodgings = useSelector((state) => Object.values(state.lodgings));
@@ -46,6 +45,10 @@ export default function Booking(){
 
     const Submit = async(e) => {
         e.preventDefault();
+        if (dropDate.getDate() > extractionDate.getDate()) {
+          alert("You cannot Extract before you Drop!");
+          return;
+        }
         await dispatch(postABooking(user[0].id,
           destination[0].name,
           lodging,
@@ -54,7 +57,7 @@ export default function Booking(){
           processDate(extractionDate)))
           alert('Success! Go to Trips to view your drops!')
     };
-
+    
     return (
       <div className="bookingFormContainer">
         <div className="selectDateContainer">

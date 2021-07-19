@@ -36,7 +36,7 @@ export default function UserDrops(){
     
     const getSpecificLodgings=(dest)=>{
         const destinationId=allDestinations.filter(destination=>{
-            if(destination.name==dest){
+            if(destination.name===dest){
                 return destination.id
             }
         })
@@ -51,7 +51,7 @@ export default function UserDrops(){
     
     const getSpecificActivities=(dest)=>{
         const destinationId = allDestinations.filter((destination) => {
-          if (destination.name == dest) {
+          if (destination.name === dest) {
             return destination.id;
           }
         });
@@ -85,6 +85,11 @@ export default function UserDrops(){
 
     const submitEdit=async(e)=>{
       e.preventDefault()
+      if(newStartDate.getDate()>newEndDate.getDate()){
+        alert('Drop Date cannot be later than the Extraction Date!')
+        return
+      }
+
       const bookingId=(Number(currentEdit))
       const user_id=(Number(id))
       const destination=(newDestination)
@@ -101,7 +106,7 @@ export default function UserDrops(){
     return (
       <div className="BookingsContainer">
         {userBookings.map((booking) => (
-          <div value={booking.id}>
+          <div key={booking.user_id} value={booking.id}>
             <div value={booking.id} className="eachBookingContainer">
               <p>{booking.destination}</p>
               <div>
@@ -120,7 +125,7 @@ export default function UserDrops(){
                 <p>Planned Activities</p>
                 <ul>
                   {booking.activities.split(",").map((activity) => (
-                    <li>{activity}</li>
+                    <li key={activity}>{activity}</li>
                   ))}
                 </ul>
               </div>
@@ -130,7 +135,10 @@ export default function UserDrops(){
                 onClick={(e) => {
                   setCurrentEdit(booking.id);
                   setNewDestination(booking.destination);
-                  setNewLodging(booking.lodging)
+                  setNewLodging(booking.lodging);
+                  setNewStartDate(new Date(booking.start_date));
+                  setNewEndDate(new Date(booking.end_date));
+                  setNewActivities(booking.activities.split(','));
                 }}
               >
                 Edit
@@ -180,6 +188,7 @@ export default function UserDrops(){
                           onChange={(e) => {
                             setNewLodging(e.target.value);
                           }}
+                          checked={lodging.name===newLodging}
                           name="lodgingRadio"
                           value={lodging.name}
                         />
@@ -197,6 +206,7 @@ export default function UserDrops(){
                             onChange={(e) => {
                               updateNewActivities(e.target.value);
                             }}
+                            checked={newActivities.includes(activity.name)}
                             value={activity.name}
                             name={activity.name}
                           />

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { loadPopDest } from "../store/destinations";
 import './User.css';
 
 function User() {
-  const { userId }  = useParams();
   const dispatch = useDispatch();
   const popularDestinations=useSelector(state=>Object.values(state.destinations))
   
@@ -26,7 +25,7 @@ function User() {
         <p className="splashDirectionText">
           Scroll down for popular destinations
         </p>
-        <button className="suggestionBtn">Search Destinations</button>
+       
       </div>
       <div className="userPopularDestDiv">
         {popularDestinations.map((destination) => (
@@ -36,6 +35,7 @@ function User() {
               to={`/destination/${destination.id}`}
             >
               <img
+                alt='destination'
                 className="userPopDestThumbImg"
                 src={getFirstImage(destination.images)}
               />

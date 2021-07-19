@@ -9,6 +9,7 @@ import { grabUsers } from "../../store/users";
 import Booking from "../Booking/Booking";
 import "./IndividualDestination.css";
 
+
 export default function IndividualDestination() {
     const {id}=useParams()
     const [lodgingAttributes, setLodgingAttributes]=useState('')
@@ -31,8 +32,16 @@ export default function IndividualDestination() {
         dispatch(loadDestinationActivities(Number(id)))
         dispatch(getDestinationReviews(Number(id)))
         dispatch(grabUsers())
-    },[dispatch])
-
+    },[dispatch,id])
+    
+    const allowNullUserImg=()=>{
+      if(!user[0].image){
+        return "https://icon-library.com/images/ai-icon/ai-icon-7.jpg";
+      }
+      else{
+        return user[0].image;
+      }
+    }
     
     let imageArr
     if(destination.length){
@@ -43,7 +52,6 @@ export default function IndividualDestination() {
     if(lodgingAttributes.length){
       lodgingAttributeList=lodgingAttributes.split(',')
     }
-    
     
 
     const getAuthorName=(user_id)=>{
@@ -61,7 +69,13 @@ export default function IndividualDestination() {
           userImg= user.image
         }
       })
-      return userImg
+      if(!userImg){
+        
+        return "https://icon-library.com/images/ai-icon/ai-icon-7.jpg"
+      }
+      else{
+        return userImg
+      }
     }
 
     const submitReview = async (e) => {
@@ -99,12 +113,12 @@ export default function IndividualDestination() {
         )}
         {destination.length && (
           <div className="individualDestPhotosContainer">
-            <img className="individualDestFirstPic" src={imageArr[0]} />
+            <img alt='first' className="individualDestFirstPic" src={imageArr[0]} />
             <div className="individualDestOtherPicsContainer">
-              <img className="individualDestOtherPics" src={imageArr[1]} />
-              <img className="individualDestOtherPics" src={imageArr[2]} />
-              <img className="individualDestOtherPics" src={imageArr[3]} />
-              <img className="individualDestOtherPics" src={imageArr[4]} />
+              <img alt='second' className="individualDestOtherPics" src={imageArr[1]} />
+              <img alt='third' className="individualDestOtherPics" src={imageArr[2]} />
+              <img alt='fourth' className="individualDestOtherPics" src={imageArr[3]} />
+              <img alt='final' className="individualDestOtherPics" src={imageArr[4]} />
             </div>
           </div>
         )}
@@ -132,7 +146,7 @@ export default function IndividualDestination() {
             {lodgings.length &&
               lodgings.map((lodging) => (
                 <div className="lodgingThumbEach">
-                  <img className="eachLodgingImg" src={lodging.image} />
+                  <img alt='lodging' className="eachLodgingImg" src={lodging.image} />
                   <button
                     value={lodging.attributes}
                     className="lodgingSelectBtn"
@@ -168,7 +182,7 @@ export default function IndividualDestination() {
           {activities &&
             activities.map((activity) => (
               <div className="individualActivityContainer">
-                <img className="activityImage" src={activity.image} />
+                <img alt ='activity' className="activityImage" src={activity.image} />
                 <div>
                   <p className="activityName">{activity.name}</p>
                   <p className="activitySummary">{activity.attributes}</p>
@@ -181,7 +195,7 @@ export default function IndividualDestination() {
         </p>
         <p className="reviewLabel">Reviews</p>
         <div className="reviewFormContainer">
-          <img className="reviewFormUserImg" src={user[0].image} />
+          {user&&<img alt='user' className="reviewFormUserImg" src={allowNullUserImg()} />}
           <form className="reviewForm" onSubmit={submitReview}>
             <div>
               <textarea
@@ -206,7 +220,7 @@ export default function IndividualDestination() {
               <div className="eachReviewContainer">
                 <div className="eachReviewTopDiv">
                   <img
-                    alt="reviewAuthor"
+                    alt='reviewAuthor'
                     className="reviewAuthorImg"
                     src={getAuthorImg(review.user_id)}
                   />
