@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from "react-router-dom";
 import './Footer.css'
 
 
@@ -12,12 +12,12 @@ export default function Footer(){
           ______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
         </p>
         <div className="linkDiv">
-          <a
+          <Link
             className="footerlinks"
-            href="https://github.com/jjiiaaLi/3045/blob/main/README.md"
+            to="/about"
           >
             About
-          </a>
+          </Link>
           <a className="footerlinks" href="https://github.com/jjiiaaLi/3045">
             GitHub
           </a>

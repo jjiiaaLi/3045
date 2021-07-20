@@ -11,6 +11,7 @@ import Landing from './components/Landing/Landing';
 import IndividualDestination from "./components/IndividualDestination/IndividualDestination";
 import UserDrops from "./components/userDrops";
 import Footer from "./components/Footer/Footer";
+import AboutPage from './components/About';
 
 
 function App() {
@@ -48,9 +49,12 @@ function App() {
         <ProtectedRoute path="/destination/:id">
           <IndividualDestination />
         </ProtectedRoute>
-        <ProtectedRoute path='/userDrops/:id'>
+        <ProtectedRoute path="/userDrops/:id">
           <UserDrops />
         </ProtectedRoute>
+        <Route path='/about'>
+          <AboutPage />
+        </Route>
         <Route path="/not-found">
           <h1>404 page not found</h1>
         </Route>
@@ -58,7 +62,7 @@ function App() {
           <h1>404 page not found</h1>
         </Route>
       </Switch>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
