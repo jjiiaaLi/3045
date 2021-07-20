@@ -17,11 +17,12 @@ export default function UserDrops(){
     const [newLodging,setNewLodging]=useState(null)
     const [newActivities,setNewActivities]=useState([])
     const [currentEdit, setCurrentEdit]= useState(null)
+    const [newDestination,setNewDestination]=useState(null)
     const allBookings=useSelector(state=>Object.values(state.bookings))
     const allLodgings=useSelector(state=>Object.values(state.lodgings))
     const allDestinations=useSelector(state=>Object.values(state.destinations))
     const allActivities=useSelector(state=>Object.values(state.activities))
-    const [newDestination,setNewDestination]=useState(null)
+    
 
     const userBookings=allBookings.filter(booking=>{
         return booking.user_id===Number(id)
