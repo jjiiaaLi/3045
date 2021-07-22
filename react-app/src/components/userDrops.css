@@ -83,3 +83,7 @@
     cursor:pointer;
     font-size: 17px;
 }
+
+.activityLi{
+    list-style-type: none;
+}

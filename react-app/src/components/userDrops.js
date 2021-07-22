@@ -126,7 +126,7 @@ export default function UserDrops(){
                 <p>Planned Activities</p>
                 <ul>
                   {booking.activities.split(",").map((activity) => (
-                    <li key={activity}>{activity}</li>
+                    <li className='activityLi'key={activity}>{activity}</li>
                   ))}
                 </ul>
               </div>
