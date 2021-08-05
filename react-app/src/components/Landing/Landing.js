@@ -1,6 +1,7 @@
 import React from "react";
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom';
+import Footer from "../Footer/Footer";
 import './Landing.css';
 
 export default function Landing(){
@@ -33,6 +34,7 @@ export default function Landing(){
             Plan > Confirm > Drop > Explore > Extract
           </p>
         </div>
+        <Footer/>
       </div>
     );
 }
