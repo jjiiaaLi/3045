@@ -284,7 +284,7 @@ export default function IndividualDestination() {
         <div className="bookingContainer">
           <div>
             <button onClick={BookingClick} className='BookingBtn'>Plan</button>
-            {showBooking&&<Booking showBooking={showBooking}/>}
+            <Booking showBooking={showBooking}/>
           </div>
         </div>
       </div>

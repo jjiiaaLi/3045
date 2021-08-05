@@ -108,7 +108,7 @@
 
 .bookingActivitiesLabel{
     font-size:20px;
-    margin-left:68px;
+    margin-left:40px;
     border-bottom: 20px;
 }
 
@@ -127,4 +127,8 @@
     color:whitesmoke;
     border-style:hidden;
     cursor:pointer;
+}
+.bookingDatePickerContainer{
+    display: flex;
+
 }
