@@ -6,7 +6,7 @@ import './Landing.css';
 
 export default function Landing(){
     const user = useSelector(state=>Object.values(state.session))
-    console.log(user)
+    
     return (
       <div>
         <div className="landingPageDiv">
